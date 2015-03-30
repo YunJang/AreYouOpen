@@ -13,6 +13,7 @@
 		B1C68E781AC9F50B005D7A6B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B1C68E771AC9F50B005D7A6B /* README.md */; };
 		B1C68E7E1ACA020E005D7A6B /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C68E7D1ACA020E005D7A6B /* GoogleMaps.framework */; };
 		B1C68E801ACA033D005D7A6B /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1C68E7F1ACA033D005D7A6B /* GoogleMaps.bundle */; };
+		B1C68E881ACA0CEB005D7A6B /* LocationManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = B1C68E871ACA0CEB005D7A6B /* LocationManagerSingleton.m */; };
 		B1F2E0161972495B00DED552 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1F2E0151972495B00DED552 /* Foundation.framework */; };
 		B1F2E0181972495B00DED552 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1F2E0171972495B00DED552 /* CoreGraphics.framework */; };
 		B1F2E01A1972495B00DED552 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1F2E0191972495B00DED552 /* UIKit.framework */; };
@@ -79,6 +80,8 @@
 		B1C68E771AC9F50B005D7A6B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B1C68E7D1ACA020E005D7A6B /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		B1C68E7F1ACA033D005D7A6B /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		B1C68E861ACA0CEB005D7A6B /* LocationManagerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManagerSingleton.h; sourceTree = "<group>"; };
+		B1C68E871ACA0CEB005D7A6B /* LocationManagerSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManagerSingleton.m; sourceTree = "<group>"; };
 		B1F2E0121972495B00DED552 /* Are You Open.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Are You Open.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1F2E0151972495B00DED552 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B1F2E0171972495B00DED552 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -248,6 +251,8 @@
 				B1F2E06819724BB600DED552 /* MapInformationViewController.h */,
 				B1F2E06919724BB600DED552 /* MapInformationViewController.m */,
 				B1F2E06A19724BB600DED552 /* MapInformationViewController.xib */,
+				B1C68E861ACA0CEB005D7A6B /* LocationManagerSingleton.h */,
+				B1C68E871ACA0CEB005D7A6B /* LocationManagerSingleton.m */,
 				B1F2E0271972495B00DED552 /* Images.xcassets */,
 				B1F2E01C1972495B00DED552 /* Supporting Files */,
 			);
@@ -450,6 +455,7 @@
 				B1F2E0261972495B00DED552 /* AppDelegate.m in Sources */,
 				B1F2E0A51972625100DED552 /* UIRefreshControl+AFNetworking.m in Sources */,
 				B1F2E08B1972624A00DED552 /* AFURLResponseSerialization.m in Sources */,
+				B1C68E881ACA0CEB005D7A6B /* LocationManagerSingleton.m in Sources */,
 				B19FDF2C1ABA9F2500D9B506 /* ResultsViewController.m in Sources */,
 				B1F2E0471972499000DED552 /* SearchViewController.m in Sources */,
 				B1F2E0A31972625100DED552 /* UIImageView+AFNetworking.m in Sources */,

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Yun Jang. All rights reserved.
 //
 
+#import "LocationManagerSingleton.h"
 #import "SearchViewController.h"
 #import "Constants.h"
 #import "ResultsViewController.h"
@@ -19,9 +20,10 @@
 @property NSString *longitude;
 @property NSString *coordinates;
 
-@property CLLocationManager *lm;
+@property CLLocation *currentLocation;
 @property (weak, nonatomic) IBOutlet UITextField *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (weak, nonatomic) IBOutlet UIButton *searchNearbyButton;
 
 @end
 
@@ -38,9 +40,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.searchButton.layer setCornerRadius:4.0];
-    [self.searchButton.layer setBorderColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0].CGColor];
-    [self.searchButton.layer setBorderWidth:1.0];
+    [self setBlueButtonRoundedRectangleStyle:self.searchButton];
+    [self setBlueButtonRoundedRectangleStyle:self.searchNearbyButton];
 }
 
 - (void)viewDidLoad
@@ -49,16 +50,8 @@
     [self.searchBar setDelegate:self];
     
     // Get your current location.
-    self.lm = [CLLocationManager new];
-    [self.lm setDelegate:self];
-    self.lm.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-    if ([self.lm respondsToSelector:@selector(requestAlwaysAuthorization)])
-    {
-        NSLog(@"Location Authorization Complete.");
-        [self.lm requestAlwaysAuthorization];
-        [self.lm requestWhenInUseAuthorization];
-    }
-    [self.lm startUpdatingLocation];
+    [[LocationManagerSingleton singleton] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
+    [[LocationManagerSingleton singleton] startUpdatingLocation];
 }
 
 #pragma mark Logic
@@ -71,7 +64,7 @@
         if (i == [arr count] - 1)
             locationString = [locationString stringByAppendingString:[arr objectAtIndex:i]];
         else
-            locationString = [[locationString stringByAppendingString:[arr objectAtIndex:i]] stringByAppendingString:@"%20"];
+            locationString = [[locationString stringByAppendingString:[arr objectAtIndex:i]] stringByAppendingString:@"%20"]; // I need to test this out some more.
     }
     return locationString;
 }
@@ -123,6 +116,12 @@
     [operation start];
 }
 
+- (IBAction)searchNearbyButtonTouchUp:(id)sender
+{
+    NSLog(@"This should show a Map with the nearby locations.");
+
+}
+
 #pragma mark UITextFieldViewDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -134,21 +133,24 @@
     return NO;
 }
 
-#pragma mark CLLocationManager
+# pragma mark ButtonUIStyle
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+- (void) setBlueButtonRoundedRectangleStyle:(UIButton *)button
 {
-    // Grab the latitude/longitude from the location manager.
-    self.latitude = [NSString stringWithFormat:@"%f", self.lm.location.coordinate.latitude];
-    self.longitude = [NSString stringWithFormat:@"%f", self.lm.location.coordinate.longitude];
-
-    NSLog(@"Location Updating Complete - Lat: %@ | Lng: %@", self.latitude, self.longitude);
-    [manager stopUpdatingLocation];
+    [button.layer setCornerRadius:4.0];
+    [button.layer setBorderColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0].CGColor];
+    [button.layer setBorderWidth:1.0];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+# pragma mark KVO
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    NSLog(@"Error: %@", [error localizedDescription]);
+    if ([keyPath isEqualToString:@"currentLocation"])
+    {
+        NSLog(@"KVO Triggered - Setting new current location.");
+        self.currentLocation = [[LocationManagerSingleton singleton] currentLocation];
+    }
 }
 
 @end
