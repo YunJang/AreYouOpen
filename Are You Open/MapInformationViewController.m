@@ -104,7 +104,7 @@
     GMSMapView *mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, self.googleMapsView.frame.size.width, self.googleMapsView.frame.size.height) camera:camera];
     [mapView setMyLocationEnabled:YES];
     [mapView setDelegate:self];
-    
+
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.position = camera.target;
     marker.map = mapView;
