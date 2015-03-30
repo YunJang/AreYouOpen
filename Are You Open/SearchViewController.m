@@ -16,10 +16,6 @@
 
 @interface SearchViewController () <UITextFieldDelegate, CLLocationManagerDelegate>
 
-@property NSString *latitude;
-@property NSString *longitude;
-@property NSString *coordinates;
-
 @property CLLocation *currentLocation;
 @property (weak, nonatomic) IBOutlet UITextField *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
@@ -75,7 +71,7 @@
 {
     // Generate the URL to fetch the JSON.
     NSURL *jsonURL = [NSURL URLWithString:[[[[GooglePlacesNearbyJSONURL
-                        stringByAppendingString:[NSString stringWithFormat:@"%@,%@", self.latitude, self.longitude]]
+                        stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
                         stringByAppendingString:GooglePlacesDistance]
                         stringByAppendingString:[self parsedString]]
                         stringByAppendingString:GooglePlacesAPIKey]];
