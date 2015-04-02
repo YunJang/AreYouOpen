@@ -13,6 +13,7 @@
 #import "MapInformationViewController.h"
 #import "AFNetworking.h"
 #import <CoreLocation/CoreLocation.h>
+#import "CloseToMeViewController.h"
 
 @interface SearchViewController () <UITextFieldDelegate, CLLocationManagerDelegate>
 
@@ -114,7 +115,47 @@
 
 - (IBAction)searchNearbyButtonTouchUp:(id)sender
 {
-    NSLog(@"This should show a Map with the nearby locations.");
+    // Generate the URL to fetch the JSON.
+    NSURL *jsonURL = [NSURL URLWithString:[[[[GooglePlacesNearbyJSONURL
+                                              stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
+                                             stringByAppendingString:GooglePlacesDistance]
+                                            stringByAppendingString:[self parsedString]]
+                                           stringByAppendingString:GooglePlacesAPIKey]];
+    
+    // Once Nearby JSON is obtained, get the Details JSON.
+    NSURLRequest *request = [NSURLRequest requestWithURL:jsonURL];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject) {
+        
+        // Work here.
+        // Do error checking to make sure query is valid.
+        // Check the results and get the specific data into a dictionary to send to next view controller.
+        // Data needed: name, place_id, address.
+        NSArray *nearbyResults = [responseObject objectForKey:@"results"];
+
+        // Add the name, place_id, and vicinity into a dictionary and add it into an array.
+        NSMutableArray *placesArr = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [nearbyResults count]; ++i)
+        {
+            NSDictionary *placeDic = [nearbyResults objectAtIndex:i];
+            NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
+            [tempDic setObject:[placeDic objectForKey:@"name"] forKey:@"name"];
+            [tempDic setObject:[placeDic objectForKey:@"place_id"] forKey:@"place_id"];
+            [tempDic setObject:[placeDic objectForKey:@"vicinity"] forKey:@"vicinity"];
+            [tempDic setObject:[placeDic valueForKeyPath:@"geometry.location"] forKey:@"location"];
+            [placesArr addObject:tempDic];
+        }
+        
+        CloseToMeViewController *vc = [[CloseToMeViewController alloc] initWithArray:placesArr currentLocation:self.currentLocation];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"NearbyViewController: %@", [error localizedDescription]);
+    }];
+    
+    [operation start];
+
 
 }
 

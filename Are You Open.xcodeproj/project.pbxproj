@@ -60,6 +60,8 @@
 		B1F2E0A41972625100DED552 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F2E09A1972625100DED552 /* UIProgressView+AFNetworking.m */; };
 		B1F2E0A51972625100DED552 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F2E09C1972625100DED552 /* UIRefreshControl+AFNetworking.m */; };
 		B1F2E0A61972625100DED552 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F2E09E1972625100DED552 /* UIWebView+AFNetworking.m */; };
+		D88987F11ACB430C002EF795 /* CloseToMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88987EF1ACB430C002EF795 /* CloseToMeViewController.m */; };
+		D88987F21ACB430C002EF795 /* CloseToMeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88987F01ACB430C002EF795 /* CloseToMeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +156,9 @@
 		B1F2E09C1972625100DED552 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		B1F2E09D1972625100DED552 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		B1F2E09E1972625100DED552 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		D88987EE1ACB430C002EF795 /* CloseToMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseToMeViewController.h; sourceTree = "<group>"; };
+		D88987EF1ACB430C002EF795 /* CloseToMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseToMeViewController.m; sourceTree = "<group>"; };
+		D88987F01ACB430C002EF795 /* CloseToMeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CloseToMeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +247,9 @@
 		B1F2E01B1972495B00DED552 /* Are You Open */ = {
 			isa = PBXGroup;
 			children = (
+				D88987EE1ACB430C002EF795 /* CloseToMeViewController.h */,
+				D88987EF1ACB430C002EF795 /* CloseToMeViewController.m */,
+				D88987F01ACB430C002EF795 /* CloseToMeViewController.xib */,
 				B1F2E0441972499000DED552 /* SearchViewController.h */,
 				B1F2E0451972499000DED552 /* SearchViewController.m */,
 				B1F2E0461972499000DED552 /* SearchViewController.xib */,
@@ -425,6 +433,7 @@
 				B19FDF2D1ABA9F2500D9B506 /* ResultsViewController.xib in Resources */,
 				B1F2E0481972499000DED552 /* SearchViewController.xib in Resources */,
 				B1F2E06C19724BB600DED552 /* MapInformationViewController.xib in Resources */,
+				D88987F21ACB430C002EF795 /* CloseToMeViewController.xib in Resources */,
 				B1C68E801ACA033D005D7A6B /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +473,7 @@
 				B1F2E0851972624A00DED552 /* AFHTTPRequestOperationManager.m in Sources */,
 				B1F2E0881972624A00DED552 /* AFSecurityPolicy.m in Sources */,
 				B1F2E0A61972625100DED552 /* UIWebView+AFNetworking.m in Sources */,
+				D88987F11ACB430C002EF795 /* CloseToMeViewController.m in Sources */,
 				B1F2E04B197249C000DED552 /* Constants.m in Sources */,
 				B1F2E06B19724BB600DED552 /* MapInformationViewController.m in Sources */,
 				B1F2E0861972624A00DED552 /* AFHTTPSessionManager.m in Sources */,
