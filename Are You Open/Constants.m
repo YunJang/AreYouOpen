@@ -17,4 +17,5 @@ NSString * const GoogleMapsAPIKey = @"AIzaSyC51rzHPoyeMvXvpSAXbuDMAnGlXvBgBUM";
 NSString * const GooglePlacesNearbyJSONURL = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
 NSString * const GooglePlacesDetailsJSONURL = @"https://maps.googleapis.com/maps/api/place/details/json?placeid=";
 NSString * const GooglePlacesDistance = @"&radius=10000&types=food&name=";
+NSString * const GooglePlacesNearby = @"&radius=10000&types=food";
 NSString * const GooglePlacesAPIKey = @"&key=AIzaSyD4NMuYyaEkYMHe_mBLNbRLRNl9mcdp3Ds";

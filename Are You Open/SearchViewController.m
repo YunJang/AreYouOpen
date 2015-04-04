@@ -118,7 +118,7 @@
     // Generate the URL to fetch the JSON.
     NSURL *jsonURL = [NSURL URLWithString:[[[[GooglePlacesNearbyJSONURL
                                               stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
-                                             stringByAppendingString:GooglePlacesDistance]
+                                             stringByAppendingString:GooglePlacesNearby]
                                             stringByAppendingString:[self parsedString]]
                                            stringByAppendingString:GooglePlacesAPIKey]];
     

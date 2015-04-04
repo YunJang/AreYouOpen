@@ -7,6 +7,9 @@
 //
 
 #import "CloseToMeViewController.h"
+#import "Constants.h"
+#import "AFNetworking.h"
+#import "MapInformationViewController.h"
 
 
 @interface CloseToMeViewController () <GMSMapViewDelegate>
@@ -42,10 +45,32 @@
         NSDictionary *place = self.places[x];
         CLLocationCoordinate2D position = CLLocationCoordinate2DMake([[place valueForKeyPath:@"location.lat"] floatValue], [[place valueForKeyPath:@"location.lng"] floatValue]);
         GMSMarker *marker = [GMSMarker markerWithPosition:position];
-        marker.snippet = [NSString stringWithFormat:@"%@", [place valueForKeyPath:@"name"]];
+        marker.title = [NSString stringWithFormat:@"%@", [place valueForKeyPath:@"name"]];
+        marker.userData = [place valueForKey:@"place_id"];
         marker.map = mapView;
     }
     [self.googleMapsView addSubview:mapView];
+}
+
+- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
+{
+    NSURL *detailsURL = [NSURL URLWithString:[[GooglePlacesDetailsJSONURL
+                                               stringByAppendingString: [marker userData]]
+                                              stringByAppendingString:GooglePlacesAPIKey]];
+    
+    NSURLRequest *detailsRequest = [NSURLRequest requestWithURL:detailsURL];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:detailsRequest];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSMutableDictionary *detailsResults = [[responseObject objectForKey:@"result"] mutableCopy];
+        [self.navigationController pushViewController:[[MapInformationViewController alloc] initWithDictionary:detailsResults] animated:YES];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"CloseToMeViewController: %@", [error localizedDescription]);
+    }];
+    [operation start];
+
 }
 
 - (id)initWithArray:(NSArray *)array currentLocation:(CLLocation *)currentLocation
