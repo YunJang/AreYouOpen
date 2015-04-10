@@ -16,4 +16,5 @@ extern NSString * const GooglePlacesNearbyJSONURL;
 extern NSString * const GooglePlacesDetailsJSONURL;
 extern NSString * const GooglePlacesDistance;
 extern NSString * const GooglePlacesNearby;
+extern NSString * const GooglePlacesNearbyMap;
 extern NSString * const GooglePlacesAPIKey;
