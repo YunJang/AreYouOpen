@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -12,7 +12,7 @@
                 <outlet property="navTitle" destination="tYQ-gE-gtd" id="JlP-Hw-w56"/>
                 <outlet property="noOpenHoursLabel" destination="o2k-4N-8KN" id="YLd-rZ-yGD"/>
                 <outlet property="openHoursView" destination="Fz7-7J-4TV" id="cqm-A6-j4D"/>
-                <outlet property="openIndicator" destination="e0j-S4-dNB" id="Gpj-BR-iFj"/>
+                <outlet property="openIndicator" destination="QZP-6n-aQW" id="HxO-8B-HIv"/>
                 <outlet property="storeAddress" destination="tnC-wh-roe" id="g1w-Iy-xLP"/>
                 <outlet property="storeName" destination="oid-gC-NTm" id="Izs-Y0-nO0"/>
                 <outlet property="storeOpenHours" destination="8eb-Eo-ANp" id="yPN-xy-zno"/>
@@ -63,7 +63,7 @@
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Store Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oid-gC-NTm">
-                            <rect key="frame" x="20" y="9" width="280" height="21"/>
+                            <rect key="frame" x="20" y="9" width="272" height="21"/>
                             <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="17"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -85,10 +85,6 @@
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0j-S4-dNB" userLabel="Open Indicator">
-                            <rect key="frame" x="121" y="13" width="12" height="12"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Open Hours:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eb-Eo-ANp">
                             <rect key="frame" x="20" y="92" width="280" height="21"/>
                             <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="17"/>
@@ -202,6 +198,10 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-6n-aQW" userLabel="Open Indicator">
+                            <rect key="frame" x="297" y="13" width="12" height="12"/>
+                            <color key="backgroundColor" red="1" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>

@@ -19,11 +19,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *storeAddress;
 @property (weak, nonatomic) IBOutlet UILabel *storePhoneNumber;
 @property (weak, nonatomic) IBOutlet UILabel *storeSite;
-@property (weak, nonatomic) IBOutlet UIView *openIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *storeOpenHours;
 @property (weak, nonatomic) IBOutlet UIView *openHoursView;
 @property (weak, nonatomic) IBOutlet UIView *googleMapsView;
 @property (weak, nonatomic) IBOutlet UILabel *noOpenHoursLabel;
+@property (weak, nonatomic) IBOutlet UIView *openIndicator;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *hoursLabelCollection;
 
 
@@ -45,6 +45,7 @@
     self = [super init];
     if (self)
     {
+        NSLog(@"%@", [dictionary objectForKey:@"opening_hours"]);
 //        NSLog(@"dictionary: %@", dictionary);
 //        for (id key in dictionary)
 //            NSLog(@"%@: %@", key, [dictionary objectForKey:key]);
@@ -56,8 +57,9 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.openIndicator.layer setCornerRadius:self.openIndicator.frame.size.width / 2];
-    [self.openIndicator setBackgroundColor:[UIColor greenColor]];
+    [self setIndicatorStatus];
+    
+    // Create a method for setting stuff UI stuff like this.
     [self.openHoursView.layer setCornerRadius:5.0];
     [self.openHoursView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
     [self.openHoursView.layer setBorderWidth:1.0];
@@ -115,6 +117,23 @@
 - (IBAction)backButtonTouchUpInside:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark UI Updates
+
+- (void) setIndicatorStatus
+{
+    [self.openIndicator.layer setCornerRadius:self.openIndicator.frame.size.width / 2];
+    if ([self.storeDictionary objectForKey:@"opening_hours"])
+    {
+        NSInteger open_status = (NSInteger) [[self.storeDictionary objectForKey:@"opening_hours"] objectForKey:@"open_now"];
+        if (open_status == 0)       // red - closed indicator
+            [self.openIndicator setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:0.0 blue:0.0 alpha:1.0]];
+        else if (open_status == 1)  // green - open indicator
+            [self.openIndicator setBackgroundColor:[UIColor colorWithRed:38.0/255.0 green:193.0/255.0 blue:98.0/255.0 alpha:1.0]];
+        else                        // yellow - unknown indicator
+            [self.openIndicator setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:102.0/255.0 alpha:1.0]];
+    }
 }
 
 @end
