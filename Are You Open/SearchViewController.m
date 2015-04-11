@@ -98,6 +98,8 @@
             [tempDic setObject:[placeDic objectForKey:@"name"] forKey:@"name"];
             [tempDic setObject:[placeDic objectForKey:@"place_id"] forKey:@"place_id"];
             [tempDic setObject:[placeDic objectForKey:@"vicinity"] forKey:@"vicinity"];
+            if ([placeDic objectForKey:@"opening_hours"]) [tempDic setObject:[[placeDic objectForKey:@"opening_hours"] objectForKey:@"open_now"] forKey:@"open_now"];
+            else    [tempDic setObject:@"nil_info" forKey:@"open_now"];
             [placesArr addObject:tempDic];
         }
         

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B12D48301AD9B3EF000EE732 /* ResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B12D482E1AD9B3EF000EE732 /* ResultsTableViewCell.m */; };
+		B12D48311AD9B3EF000EE732 /* ResultsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B12D482F1AD9B3EF000EE732 /* ResultsTableViewCell.xib */; };
 		B13A0CF61AB0B61800F496C2 /* location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = B13A0CF51AB0B61800F496C2 /* location.gpx */; };
 		B19FDF2C1ABA9F2500D9B506 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B19FDF2A1ABA9F2500D9B506 /* ResultsViewController.m */; };
 		B19FDF2D1ABA9F2500D9B506 /* ResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19FDF2B1ABA9F2500D9B506 /* ResultsViewController.xib */; };
@@ -74,6 +76,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B12D482D1AD9B3EF000EE732 /* ResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewCell.h; sourceTree = "<group>"; };
+		B12D482E1AD9B3EF000EE732 /* ResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewCell.m; sourceTree = "<group>"; };
+		B12D482F1AD9B3EF000EE732 /* ResultsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsTableViewCell.xib; sourceTree = "<group>"; };
 		B13A0CF51AB0B61800F496C2 /* location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = location.gpx; sourceTree = "<group>"; };
 		B19FDF291ABA9F2500D9B506 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
 		B19FDF2A1ABA9F2500D9B506 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
@@ -197,6 +202,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B12D48321AD9B3FA000EE732 /* Table View Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B12D482D1AD9B3EF000EE732 /* ResultsTableViewCell.h */,
+				B12D482E1AD9B3EF000EE732 /* ResultsTableViewCell.m */,
+				B12D482F1AD9B3EF000EE732 /* ResultsTableViewCell.xib */,
+			);
+			name = "Table View Cell";
+			sourceTree = "<group>";
+		};
 		B1F2E0091972495B00DED552 = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +261,7 @@
 		B1F2E01B1972495B00DED552 /* Are You Open */ = {
 			isa = PBXGroup;
 			children = (
+				B12D48321AD9B3FA000EE732 /* Table View Cell */,
 				D88987EE1ACB430C002EF795 /* CloseToMeViewController.h */,
 				D88987EF1ACB430C002EF795 /* CloseToMeViewController.m */,
 				D88987F01ACB430C002EF795 /* CloseToMeViewController.xib */,
@@ -437,6 +453,7 @@
 				B1F2E06C19724BB600DED552 /* MapInformationViewController.xib in Resources */,
 				D88987F21ACB430C002EF795 /* CloseToMeViewController.xib in Resources */,
 				B1C68E801ACA033D005D7A6B /* GoogleMaps.bundle in Resources */,
+				B12D48311AD9B3EF000EE732 /* ResultsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +482,7 @@
 				B1F2E0261972495B00DED552 /* AppDelegate.m in Sources */,
 				B1F2E0A51972625100DED552 /* UIRefreshControl+AFNetworking.m in Sources */,
 				B1F2E08B1972624A00DED552 /* AFURLResponseSerialization.m in Sources */,
+				B12D48301AD9B3EF000EE732 /* ResultsTableViewCell.m in Sources */,
 				B1C68E881ACA0CEB005D7A6B /* LocationManagerSingleton.m in Sources */,
 				B19FDF2C1ABA9F2500D9B506 /* ResultsViewController.m in Sources */,
 				B1F2E0471972499000DED552 /* SearchViewController.m in Sources */,

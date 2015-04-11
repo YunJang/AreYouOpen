@@ -203,7 +203,7 @@
                             <rect key="frame" x="297" y="13" width="12" height="12"/>
                             <color key="backgroundColor" red="1" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJp-fT-r4S" userLabel="Open Indicator Animate">
+                        <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJp-fT-r4S" userLabel="Open Indicator Animate">
                             <rect key="frame" x="297" y="13" width="12" height="12"/>
                             <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>

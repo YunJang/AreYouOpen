@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "AFNetworking.h"
 #import "MapInformationViewController.h"
+#import "ResultsTableViewCell.h"
 
 @interface ResultsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *searchLabel;
@@ -24,7 +25,9 @@
     [self.searchLabel setText:[[@"\"" stringByAppendingString:self.searchTitle] stringByAppendingString:@"\""]];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ResultsCell"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CustomResultsCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"ResultsTableViewCell" bundle:nil] forCellReuseIdentifier:@"CustomResultsCell"];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ResultsCell"];
 }
 
 - (IBAction)backButtonTouchUpInside:(id)sender
@@ -41,15 +44,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"ResultsCell";
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    [cell.textLabel setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:15.0]];
-    [cell.detailTextLabel setFont:[UIFont fontWithName:@"STHeitiTC-Light" size:12.0]];
-    [cell.detailTextLabel setTextColor:[UIColor darkGrayColor]];
+    ResultsTableViewCell *cell;
+    cell = [tableView dequeueReusableCellWithIdentifier:@"CustomResultsCell"];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     NSDictionary *placesDic = [self.placesArr objectAtIndex:indexPath.row];
-    [cell.textLabel setText:[placesDic objectForKey:@"name"]];
-    [cell.detailTextLabel setText:[placesDic objectForKey:@"vicinity"]];
+    [cell setStoreNameText:[placesDic objectForKey:@"name"]];
+    [cell setAddressText:[placesDic objectForKey:@"vicinity"]];
+    [cell setOpenStatus:[placesDic objectForKey:@"open_now"]];
     return cell;
 }
 
@@ -74,6 +76,17 @@
         NSLog(@"ResultsViewController: %@", [error localizedDescription]);
     }];
     [operation start];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Makes Xcode not throw out a warning about the custom table view cell.
+    return 44.0;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0;
 }
 
 @end

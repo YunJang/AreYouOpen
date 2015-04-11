@@ -132,13 +132,15 @@
         id open_status = [[self.storeDictionary objectForKey:@"opening_hours"] objectForKey:@"open_now"];
         if (!open_status)       // red - closed indicator
             [self.openIndicator setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:0.0 blue:0.0 alpha:1.0]];
-        else if (open_status)  // green - open indicator
+        else if (open_status)              // green - open indicator
             [self.openIndicator setBackgroundColor:[UIColor colorWithRed:38.0/255.0 green:193.0/255.0 blue:98.0/255.0 alpha:1.0]];
-        else                        // yellow - unknown indicator
+        else
             [self.openIndicator setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:102.0/255.0 alpha:1.0]];
     }
-    [self.openIndicatorAnimate setBackgroundColor:self.openIndicator.backgroundColor];
-    [self.openIndicatorAnimate setBackgroundColor:[UIColor purpleColor]];
+    else
+    {
+        [self.openIndicator setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:102.0/255.0 alpha:1.0]];
+    }
 }
 
 - (void) doAnimation
