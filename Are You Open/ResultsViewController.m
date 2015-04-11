@@ -27,7 +27,6 @@
     [self.tableView setDataSource:self];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CustomResultsCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"ResultsTableViewCell" bundle:nil] forCellReuseIdentifier:@"CustomResultsCell"];
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ResultsCell"];
 }
 
 - (IBAction)backButtonTouchUpInside:(id)sender
