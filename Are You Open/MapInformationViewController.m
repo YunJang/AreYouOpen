@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *googleMapsView;
 @property (weak, nonatomic) IBOutlet UILabel *noOpenHoursLabel;
 @property (weak, nonatomic) IBOutlet UIView *openIndicator;
+@property (weak, nonatomic) IBOutlet UIView *openIndicatorAnimate;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *hoursLabelCollection;
 
 
@@ -45,7 +46,7 @@
     self = [super init];
     if (self)
     {
-        NSLog(@"%@", [dictionary objectForKey:@"opening_hours"]);
+//        NSLog(@"%@", [dictionary objectForKey:@"opening_hours"]);
 //        NSLog(@"dictionary: %@", dictionary);
 //        for (id key in dictionary)
 //            NSLog(@"%@: %@", key, [dictionary objectForKey:key]);
@@ -68,6 +69,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    [self doAnimation];
 
     // Set the labels.
     [self.navTitle setText:[self.storeDictionary objectForKey:@"name"]];
@@ -124,16 +126,24 @@
 - (void) setIndicatorStatus
 {
     [self.openIndicator.layer setCornerRadius:self.openIndicator.frame.size.width / 2];
+    [self.openIndicatorAnimate.layer setCornerRadius:self.openIndicatorAnimate.frame.size.width / 2];
     if ([self.storeDictionary objectForKey:@"opening_hours"])
     {
-        NSInteger open_status = (NSInteger) [[self.storeDictionary objectForKey:@"opening_hours"] objectForKey:@"open_now"];
-        if (open_status == 0)       // red - closed indicator
+        id open_status = [[self.storeDictionary objectForKey:@"opening_hours"] objectForKey:@"open_now"];
+        if (!open_status)       // red - closed indicator
             [self.openIndicator setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:0.0 blue:0.0 alpha:1.0]];
-        else if (open_status == 1)  // green - open indicator
+        else if (open_status)  // green - open indicator
             [self.openIndicator setBackgroundColor:[UIColor colorWithRed:38.0/255.0 green:193.0/255.0 blue:98.0/255.0 alpha:1.0]];
         else                        // yellow - unknown indicator
             [self.openIndicator setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:102.0/255.0 alpha:1.0]];
     }
+    [self.openIndicatorAnimate setBackgroundColor:self.openIndicator.backgroundColor];
+    [self.openIndicatorAnimate setBackgroundColor:[UIColor purpleColor]];
+}
+
+- (void) doAnimation
+{
+    // Look up Core Animation.
 }
 
 @end

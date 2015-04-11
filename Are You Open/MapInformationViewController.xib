@@ -13,6 +13,7 @@
                 <outlet property="noOpenHoursLabel" destination="o2k-4N-8KN" id="YLd-rZ-yGD"/>
                 <outlet property="openHoursView" destination="Fz7-7J-4TV" id="cqm-A6-j4D"/>
                 <outlet property="openIndicator" destination="QZP-6n-aQW" id="HxO-8B-HIv"/>
+                <outlet property="openIndicatorAnimate" destination="XJp-fT-r4S" id="6pQ-4e-6lw"/>
                 <outlet property="storeAddress" destination="tnC-wh-roe" id="g1w-Iy-xLP"/>
                 <outlet property="storeName" destination="oid-gC-NTm" id="Izs-Y0-nO0"/>
                 <outlet property="storeOpenHours" destination="8eb-Eo-ANp" id="yPN-xy-zno"/>
@@ -201,6 +202,10 @@
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-6n-aQW" userLabel="Open Indicator">
                             <rect key="frame" x="297" y="13" width="12" height="12"/>
                             <color key="backgroundColor" red="1" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJp-fT-r4S" userLabel="Open Indicator Animate">
+                            <rect key="frame" x="297" y="13" width="12" height="12"/>
+                            <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

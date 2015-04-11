@@ -10,7 +10,6 @@
 		B13A0CF61AB0B61800F496C2 /* location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = B13A0CF51AB0B61800F496C2 /* location.gpx */; };
 		B19FDF2C1ABA9F2500D9B506 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B19FDF2A1ABA9F2500D9B506 /* ResultsViewController.m */; };
 		B19FDF2D1ABA9F2500D9B506 /* ResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19FDF2B1ABA9F2500D9B506 /* ResultsViewController.xib */; };
-		B1C68E781AC9F50B005D7A6B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B1C68E771AC9F50B005D7A6B /* README.md */; };
 		B1C68E7E1ACA020E005D7A6B /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C68E7D1ACA020E005D7A6B /* GoogleMaps.framework */; };
 		B1C68E801ACA033D005D7A6B /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1C68E7F1ACA033D005D7A6B /* GoogleMaps.bundle */; };
 		B1C68E881ACA0CEB005D7A6B /* LocationManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = B1C68E871ACA0CEB005D7A6B /* LocationManagerSingleton.m */; };
@@ -462,7 +461,6 @@
 				B1F2E0871972624A00DED552 /* AFNetworkReachabilityManager.m in Sources */,
 				B1F2E0A41972625100DED552 /* UIProgressView+AFNetworking.m in Sources */,
 				B1F2E08C1972624A00DED552 /* AFURLSessionManager.m in Sources */,
-				B1C68E781AC9F50B005D7A6B /* README.md in Sources */,
 				B1F2E08A1972624A00DED552 /* AFURLRequestSerialization.m in Sources */,
 				B1F2E0261972495B00DED552 /* AppDelegate.m in Sources */,
 				B1F2E0A51972625100DED552 /* UIRefreshControl+AFNetworking.m in Sources */,
