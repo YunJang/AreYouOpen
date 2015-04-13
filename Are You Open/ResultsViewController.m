@@ -22,7 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.searchLabel setText:[[@"\"" stringByAppendingString:self.searchTitle] stringByAppendingString:@"\""]];
+    self.searchTitle = [self.searchTitle stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
+    [self.searchLabel setText:[self.searchTitle isEqualToString:@""] ? @"Anything Nearby!" : [[@"\"" stringByAppendingString:self.searchTitle] stringByAppendingString:@"\""]];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CustomResultsCell"];
