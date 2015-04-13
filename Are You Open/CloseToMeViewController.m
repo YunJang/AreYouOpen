@@ -47,6 +47,13 @@
         GMSMarker *marker = [GMSMarker markerWithPosition:position];
         marker.title = [NSString stringWithFormat:@"%@", [place valueForKeyPath:@"name"]];
         marker.userData = [place valueForKey:@"place_id"];
+        // green if currenlty open, red otherwise
+        if ([place valueForKey:@"open_now"]) {
+            marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+        }
+        else {
+            marker.icon = [GMSMarker markerImageWithColor:[UIColor redColor]];
+        }
         marker.map = mapView;
     }
     [self.googleMapsView addSubview:mapView];

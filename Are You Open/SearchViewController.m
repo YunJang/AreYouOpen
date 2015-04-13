@@ -146,6 +146,12 @@
             [tempDic setObject:[placeDic objectForKey:@"place_id"] forKey:@"place_id"];
             [tempDic setObject:[placeDic objectForKey:@"vicinity"] forKey:@"vicinity"];
             [tempDic setObject:[placeDic valueForKeyPath:@"geometry.location"] forKey:@"location"];
+            if ([placeDic valueForKeyPath:@"opening_hours.open_now"]) {
+                [tempDic setObject:[placeDic valueForKeyPath:@"opening_hours.open_now"] forKey:@"open_now"];
+            }
+            else {
+                [tempDic setObject:@"nil_info" forKey:@"open_now"];
+            }
             [placesArr addObject:tempDic];
         }
         
