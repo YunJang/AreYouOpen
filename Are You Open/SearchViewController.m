@@ -21,10 +21,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchNearbyButton;
+@property (strong, nonatomic) IBOutlet UIPickerView *picker;
+@property (weak, nonatomic) IBOutlet UIButton *changeRadiusButton;
+@property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
+@property long radius;
 
 @end
 
 @implementation SearchViewController
+{
+    NSArray *_pickerData;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,12 +46,19 @@
 {
     [self setBlueButtonRoundedRectangleStyle:self.searchButton];
     [self setBlueButtonRoundedRectangleStyle:self.searchNearbyButton];
+    [self setBlueButtonRoundedRectangleStyle:self.changeRadiusButton];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self.searchBar setDelegate:self];
+    // set picker data
+    _pickerData = @[@"1 Mile", @"3 Miles", @"5 Miles"];
+    self.picker.dataSource = self;
+    self.picker.delegate = self;
+    self.picker.hidden = YES;
+    self.pickerToolbar.hidden = YES;
     
     // Get your current location.
     [[LocationManagerSingleton singleton] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
@@ -199,4 +213,38 @@
     }
 }
 
+# pragma mark pickerView
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _pickerData.count;
+}
+
+// to display actual text
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return _pickerData[row];
+}
+
+- (IBAction)changeRadius:(id)sender {
+    self.picker.hidden = NO;
+    self.pickerToolbar.hidden = NO;
+}
+
+- (IBAction)tappedDoneInPicker:(id)sender {
+    NSInteger row = [self.picker selectedRowInComponent:0];
+    self.radius = [_pickerData[row] integerValue];
+    [self.changeRadiusButton setTitle:[NSString stringWithFormat:@"Radius: %lu miles", self.radius] forState:UIControlStateNormal];
+    self.picker.hidden = YES;
+    self.pickerToolbar.hidden = YES;
+}
+- (IBAction)tappedCancelInPicker:(id)sender {
+    self.picker.hidden = YES;
+    self.pickerToolbar.hidden = YES;
+}
 @end

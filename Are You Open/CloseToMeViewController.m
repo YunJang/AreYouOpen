@@ -48,6 +48,7 @@
         marker.title = [NSString stringWithFormat:@"%@", [place valueForKeyPath:@"name"]];
         marker.userData = [place valueForKey:@"place_id"];
         // green if currenlty open, red otherwise
+        // TODO: handle nil_info
         if ([place valueForKey:@"open_now"]) {
             marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
         }
