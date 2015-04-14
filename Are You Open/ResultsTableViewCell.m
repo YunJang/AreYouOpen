@@ -33,7 +33,7 @@
 {
     if ([openStatus isKindOfClass:[NSString class]])    // yellow - unknown indicator
         [self.openIndicator setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:102.0/255.0 alpha:1.0]];
-    else if (!openStatus)                               // red - closed indicator
+    else if (![openStatus integerValue])                // red - closed indicator
         [self.openIndicator setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:0.0 blue:0.0 alpha:1.0]];
     else                                                // green - open indicator
         [self.openIndicator setBackgroundColor:[UIColor colorWithRed:38.0/255.0 green:193.0/255.0 blue:98.0/255.0 alpha:1.0]];

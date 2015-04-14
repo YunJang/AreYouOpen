@@ -49,11 +49,15 @@
         marker.userData = [place valueForKey:@"place_id"];
         // green if currenlty open, red otherwise
         // TODO: handle nil_info
-        if ([place valueForKey:@"open_now"]) {
+        if ([[place valueForKey:@"open_now"] integerValue]) {
             marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
         }
-        else {
+        else if (![[place valueForKeyPath:@"open_now"] integerValue]){
             marker.icon = [GMSMarker markerImageWithColor:[UIColor redColor]];
+        }
+        else {
+            // nil_info
+            marker.icon = [GMSMarker markerImageWithColor:[UIColor yellowColor]];
         }
         marker.map = mapView;
     }
