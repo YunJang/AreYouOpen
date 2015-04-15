@@ -49,6 +49,12 @@
     [self setBlueButtonRoundedRectangleStyle:self.changeRadiusButton];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.searchButton setUserInteractionEnabled:YES];
+    [self.searchNearbyButton setUserInteractionEnabled:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -84,6 +90,8 @@
 
 - (IBAction)searchButtonTouchUpInside:(id)sender
 {
+    [self.searchButton setUserInteractionEnabled:NO];
+    
     // Generate the URL to fetch the JSON.
     NSURL *jsonURL = [NSURL URLWithString:[[[[GooglePlacesNearbyJSONURL
                         stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
@@ -131,6 +139,8 @@
 
 - (IBAction)searchNearbyButtonTouchUp:(id)sender
 {
+    [self.searchNearbyButton setUserInteractionEnabled:NO];
+    
     // Generate the URL to fetch the JSON.
     NSURL *jsonURL = [NSURL URLWithString:[[[[GooglePlacesNearbyJSONURL
                                               stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
