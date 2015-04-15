@@ -32,7 +32,7 @@
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
         {
-            NSLog(@"Location Authorization Complete.");
+//            NSLog(@"Location Authorization Complete.");
             [self.locationManager requestAlwaysAuthorization];
             [self.locationManager requestWhenInUseAuthorization];
         }
@@ -42,7 +42,6 @@
 
 - (void)startUpdatingLocation
 {
-    NSLog(@"Updating our current location.");
     [self.locationManager startUpdatingLocation];
 }
 
@@ -50,7 +49,7 @@
 {
     // Get the latitude/longitude from our current location.
     CLLocation *location = [locations lastObject];
-    NSLog(@"Location Updating Complete - Lat: %f | Lng: %f", location.coordinate.latitude, location.coordinate.longitude);
+//    NSLog(@"Location Updating Complete - Lat: %f | Lng: %f", location.coordinate.latitude, location.coordinate.longitude);
     self.currentLocation = location;
     [manager stopUpdatingLocation];
 }

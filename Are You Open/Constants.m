@@ -16,6 +16,12 @@ NSString * const GoogleMapsAPIKey = @"AIzaSyC51rzHPoyeMvXvpSAXbuDMAnGlXvBgBUM";
 // Google Places
 NSString * const GooglePlacesNearbyJSONURL = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
 NSString * const GooglePlacesDetailsJSONURL = @"https://maps.googleapis.com/maps/api/place/details/json?placeid=";
-NSString * const GooglePlacesDistance = @"&radius=10000&types=food&name=";
+NSString * const GooglePlacesDistance = @"&radius=";
+NSString * const GooglePlacesCategory = @"&types=food";
+NSString * const GooglePlacesName = @"&name=";
+//NSString * const GooglePlacesDistance = @"&radius=10000&types=food&name=";
 NSString * const GooglePlacesNearby = @"&radius=1600&types=food&name="; // radius ~1 mile
 NSString * const GooglePlacesAPIKey = @"&key=AIzaSyD4NMuYyaEkYMHe_mBLNbRLRNl9mcdp3Ds";
+
+// Math
+long const METERS = 1609.34;

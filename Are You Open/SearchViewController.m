@@ -59,12 +59,7 @@
 {
     [super viewDidLoad];
     [self.searchBar setDelegate:self];
-    // set picker data
-    _pickerData = @[@"1 Mile", @"3 Miles", @"5 Miles"];
-    self.picker.dataSource = self;
-    self.picker.delegate = self;
-    self.picker.hidden = YES;
-    self.pickerToolbar.hidden = YES;
+    [self loadPickerData];
     
     // Get your current location.
     [[LocationManagerSingleton singleton] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
@@ -93,11 +88,16 @@
     [self.searchButton setUserInteractionEnabled:NO];
     
     // Generate the URL to fetch the JSON.
-    NSURL *jsonURL = [NSURL URLWithString:[[[[GooglePlacesNearbyJSONURL
+    NSURL *jsonURL = [NSURL URLWithString:[[[[[[[GooglePlacesNearbyJSONURL
                         stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
                         stringByAppendingString:GooglePlacesDistance]
+                        stringByAppendingString:[[NSNumber numberWithLong:self.radius * METERS] stringValue]]
+                        stringByAppendingString:GooglePlacesCategory]
+                        stringByAppendingString:GooglePlacesName]
                         stringByAppendingString:[self parsedString]]
                         stringByAppendingString:GooglePlacesAPIKey]];
+    
+    NSLog(@"URL: %@", [jsonURL description]);
     
     // Once Nearby JSON is obtained, get the Details JSON.
     NSURLRequest *request = [NSURLRequest requestWithURL:jsonURL];
@@ -202,6 +202,20 @@
     return NO;
 }
 
+# pragma mark Setup
+
+- (void)loadPickerData
+{
+    _pickerData = @[@"1 Mile", @"3 Miles", @"5 Miles"];
+    self.picker.dataSource = self;
+    self.picker.delegate = self;
+    self.picker.hidden = YES;
+    [self.picker selectRow:[_pickerData count] - 1 inComponent:0 animated:YES];
+    self.pickerToolbar.hidden = YES;
+    self.radius = [_pickerData[[self.picker selectedRowInComponent:0]] integerValue];
+    [self.changeRadiusButton setTitle:[NSString stringWithFormat:@"Radius: %lu miles", self.radius] forState:UIControlStateNormal];
+}
+
 # pragma mark ButtonUIStyle
 
 - (void) setBlueButtonRoundedRectangleStyle:(UIButton *)button
@@ -218,7 +232,7 @@
 {
     if ([keyPath isEqualToString:@"currentLocation"])
     {
-        NSLog(@"KVO Triggered - Setting new current location.");
+//        NSLog(@"KVO Triggered - Setting new current location.");
         self.currentLocation = [[LocationManagerSingleton singleton] currentLocation];
     }
 }
