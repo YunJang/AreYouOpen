@@ -22,16 +22,20 @@
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchNearbyButton;
 @property (strong, nonatomic) IBOutlet UIPickerView *picker;
+@property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
 @property (weak, nonatomic) IBOutlet UIButton *changeRadiusButton;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
+@property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property long radius;
 @property long pickerRow;
+@property id currentPicker;
 
 @end
 
 @implementation SearchViewController
 {
     NSArray *_pickerData;
+    NSArray *_categoryData;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -48,6 +52,7 @@
     [self setBlueButtonRoundedRectangleStyle:self.searchButton];
     [self setBlueButtonRoundedRectangleStyle:self.searchNearbyButton];
     [self setBlueButtonRoundedRectangleStyle:self.changeRadiusButton];
+    [self setBlueButtonRoundedRectangleStyle:self.categoryButton];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -61,6 +66,7 @@
     [super viewDidLoad];
     [self.searchBar setDelegate:self];
     [self loadPickerData];
+    [self loadCategoryData];
     
     // Get your current location.
     [[LocationManagerSingleton singleton] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
@@ -87,7 +93,7 @@
 - (IBAction)searchButtonTouchUpInside:(id)sender
 {
     [self.searchButton setUserInteractionEnabled:NO];
-    [self updatePickerHiddenStatus:YES saveValue:NO];
+    [self updatePickerHiddenStatus:YES saveValue:NO picker:self.picker];
     
     // Generate the URL to fetch the JSON.
     NSURL *jsonURL = [NSURL URLWithString:[[[[[[[GooglePlacesNearbyJSONURL
@@ -140,7 +146,7 @@
 - (IBAction)searchNearbyButtonTouchUp:(id)sender
 {
     [self.searchNearbyButton setUserInteractionEnabled:NO];
-    [self updatePickerHiddenStatus:YES saveValue:NO];
+    [self updatePickerHiddenStatus:YES saveValue:NO picker:self.picker];
     
     NSURL *jsonURL = [NSURL URLWithString:[[[[[[[GooglePlacesNearbyJSONURL
                                                  stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
@@ -213,7 +219,18 @@
     self.picker.dataSource = self;
     self.picker.delegate = self;
     [self.picker selectRow:[_pickerData count] - 1 inComponent:0 animated:YES];
-    [self updatePickerHiddenStatus:YES saveValue:YES];
+    [self updatePickerHiddenStatus:YES saveValue:YES picker:self.picker];
+}
+
+- (void)loadCategoryData
+{
+    // To add categories, need to have two separate picker views
+    // Probably gonna need to use tags in order to be able to distinguish delegation and data sources.
+    _categoryData = @[@"Food", @"Bar", @"Cafe"];
+    self.categoryPicker.dataSource = self;
+    self.categoryPicker.delegate = self;
+    [self.categoryPicker selectRow:0 inComponent:0 animated:YES];
+    [self updatePickerHiddenStatus:YES saveValue:YES picker:self.categoryPicker];
 }
 
 # pragma mark ButtonUIStyle
@@ -246,40 +263,56 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return _pickerData.count;
+    if (pickerView.tag == 1)
+        return _pickerData.count;
+    else if (pickerView.tag == 2)
+        return _categoryData.count;
+
+    // Should never reach here.
+    return 0;
 }
 
 // to display actual text
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return _pickerData[row];
+    if (pickerView.tag == 1)
+        return _pickerData[row];
+    if (pickerView.tag == 2)
+        return _categoryData[row];
+    return @"Something went wrong.";
 }
 
+/* Can do some refactoring here. I'll get to it soon. */
 - (IBAction)changeRadius:(id)sender {
-    [self updatePickerHiddenStatus:NO saveValue:NO];
+    [self updatePickerHiddenStatus:NO saveValue:NO picker:self.picker];
     [self.picker selectRow:self.pickerRow inComponent:0 animated:YES];
+    self.currentPicker = self.picker;
+}
+
+- (IBAction)changeCategory:(id)sender
+{
+    [self updatePickerHiddenStatus:NO saveValue:NO picker:self.categoryPicker];
+    [self.categoryPicker selectRow:self.pickerRow inComponent:0 animated:YES];
+    self.currentPicker = self.categoryPicker;
 }
 
 - (IBAction)tappedDoneInPicker:(id)sender {
-    [self updatePickerHiddenStatus:YES saveValue:YES];
+    [self updatePickerHiddenStatus:YES saveValue:YES picker:self.currentPicker];
 }
 - (IBAction)tappedCancelInPicker:(id)sender {
-    [self updatePickerHiddenStatus:YES saveValue:NO];
+    [self updatePickerHiddenStatus:YES saveValue:NO picker:self.currentPicker];
 }
 
-- (void)updatePickerHiddenStatus: (BOOL)hide saveValue: (BOOL)save{
-    self.picker.hidden = hide;
+- (void)updatePickerHiddenStatus:(BOOL)hide saveValue:(BOOL)save picker:(UIPickerView *)picker
+{
+    assert ([picker isKindOfClass:[UIPickerView class]]);
+    assert ([self.pickerToolbar isKindOfClass:[UIToolbar class]]);
+    picker.hidden = hide;
     self.pickerToolbar.hidden = hide;
-    if (save) {
+    if (picker.tag == 1 && save) {
         self.radius = [_pickerData[[self.picker selectedRowInComponent:0]] integerValue];
-        self.pickerRow = [self.picker selectedRowInComponent:0];
+        self.pickerRow = [picker selectedRowInComponent:0];
         [self.changeRadiusButton setTitle:[NSString stringWithFormat:@"Radius: %lu miles", self.radius] forState:UIControlStateNormal];
     }
-    // only works on text views.
-//    if (self.picker.hidden) {
-//        [self.changeRadiusButton resignFirstResponder];
-//        [self.changeRadiusButton resignFirstResponder];
-//    }
-    
 }
 @end

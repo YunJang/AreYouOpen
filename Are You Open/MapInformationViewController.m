@@ -158,12 +158,12 @@
 # pragma mark UIButton Actions
 - (IBAction)addressButtonPressed:(id)sender
 {
-    [self presentViewController:self.numAlert animated:YES completion:nil];
+    [self presentViewController:self.addressAlert animated:YES completion:nil];
 }
 
 - (IBAction)numberButtonPressed:(id)sender
 {
-    [self presentViewController:self.addressAlert animated:YES completion:nil];
+    [self presentViewController:self.numAlert animated:YES completion:nil];
 }
 
 #pragma mark Setup

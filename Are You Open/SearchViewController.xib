@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController">
             <connections>
+                <outlet property="categoryButton" destination="Euk-jQ-CNA" id="WrW-tk-i9S"/>
+                <outlet property="categoryPicker" destination="fcO-HB-8Eh" id="Lnf-od-86g"/>
                 <outlet property="changeRadiusButton" destination="PsA-e1-Rjz" id="e71-rM-Fde"/>
                 <outlet property="picker" destination="WiQ-zt-TiD" id="NSj-v3-4iC"/>
                 <outlet property="pickerToolbar" destination="aD7-Z3-e3m" id="7ef-58-Ned"/>
@@ -52,7 +54,7 @@
                         <action selector="searchButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="eJa-lV-MfC"/>
                     </connections>
                 </button>
-                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WiQ-zt-TiD">
+                <pickerView tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WiQ-zt-TiD" userLabel="Radius Picker View">
                     <rect key="frame" x="0.0" y="406" width="320" height="162"/>
                 </pickerView>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aD7-Z3-e3m">
@@ -81,6 +83,19 @@
                         <action selector="changeRadius:" destination="-1" eventType="touchUpInside" id="VG5-uI-487"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Euk-jQ-CNA" userLabel="Category Button">
+                    <rect key="frame" x="96" y="306" width="128" height="30"/>
+                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="15"/>
+                    <state key="normal" title="Type: Food">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="changeCategory:" destination="-1" eventType="touchUpInside" id="tsZ-Uc-0Bl"/>
+                    </connections>
+                </button>
+                <pickerView tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcO-HB-8Eh" userLabel="Category Picker View">
+                    <rect key="frame" x="0.0" y="406" width="320" height="162"/>
+                </pickerView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
