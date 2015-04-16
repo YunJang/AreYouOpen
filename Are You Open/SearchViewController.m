@@ -15,7 +15,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CloseToMeViewController.h"
 
-@interface SearchViewController () <UITextFieldDelegate, CLLocationManagerDelegate>
+@interface SearchViewController () <UITextFieldDelegate, CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property CLLocation *currentLocation;
 @property (weak, nonatomic) IBOutlet UITextField *searchBar;
@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *changeRadiusButton;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
 @property long radius;
+@property long pickerRow;
 
 @end
 
@@ -86,6 +87,7 @@
 - (IBAction)searchButtonTouchUpInside:(id)sender
 {
     [self.searchButton setUserInteractionEnabled:NO];
+    [self updatePickerHiddenStatus:YES saveValue:NO];
     
     // Generate the URL to fetch the JSON.
     NSURL *jsonURL = [NSURL URLWithString:[[[[[[[GooglePlacesNearbyJSONURL
@@ -138,11 +140,14 @@
 - (IBAction)searchNearbyButtonTouchUp:(id)sender
 {
     [self.searchNearbyButton setUserInteractionEnabled:NO];
+    [self updatePickerHiddenStatus:YES saveValue:NO];
     
-    // Generate the URL to fetch the JSON.
-    NSURL *jsonURL = [NSURL URLWithString:[[[[GooglePlacesNearbyJSONURL
-                                              stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
-                                             stringByAppendingString:GooglePlacesNearby]
+    NSURL *jsonURL = [NSURL URLWithString:[[[[[[[GooglePlacesNearbyJSONURL
+                                                 stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
+                                                stringByAppendingString:GooglePlacesDistance]
+                                               stringByAppendingString:[[NSNumber numberWithLong:self.radius * METERS] stringValue]]
+                                              stringByAppendingString:GooglePlacesCategory]
+                                             stringByAppendingString:GooglePlacesName]
                                             stringByAppendingString:[self parsedString]]
                                            stringByAppendingString:GooglePlacesAPIKey]];
     
@@ -207,11 +212,8 @@
     _pickerData = @[@"1 Mile", @"3 Miles", @"5 Miles"];
     self.picker.dataSource = self;
     self.picker.delegate = self;
-    self.picker.hidden = YES;
     [self.picker selectRow:[_pickerData count] - 1 inComponent:0 animated:YES];
-    self.pickerToolbar.hidden = YES;
-    self.radius = [_pickerData[[self.picker selectedRowInComponent:0]] integerValue];
-    [self.changeRadiusButton setTitle:[NSString stringWithFormat:@"Radius: %lu miles", self.radius] forState:UIControlStateNormal];
+    [self updatePickerHiddenStatus:YES saveValue:YES];
 }
 
 # pragma mark ButtonUIStyle
@@ -254,19 +256,30 @@
 }
 
 - (IBAction)changeRadius:(id)sender {
-    self.picker.hidden = NO;
-    self.pickerToolbar.hidden = NO;
+    [self updatePickerHiddenStatus:NO saveValue:NO];
+    [self.picker selectRow:self.pickerRow inComponent:0 animated:YES];
 }
 
 - (IBAction)tappedDoneInPicker:(id)sender {
-    NSInteger row = [self.picker selectedRowInComponent:0];
-    self.radius = [_pickerData[row] integerValue];
-    [self.changeRadiusButton setTitle:[NSString stringWithFormat:@"Radius: %lu miles", self.radius] forState:UIControlStateNormal];
-    self.picker.hidden = YES;
-    self.pickerToolbar.hidden = YES;
+    [self updatePickerHiddenStatus:YES saveValue:YES];
 }
 - (IBAction)tappedCancelInPicker:(id)sender {
-    self.picker.hidden = YES;
-    self.pickerToolbar.hidden = YES;
+    [self updatePickerHiddenStatus:YES saveValue:NO];
+}
+
+- (void)updatePickerHiddenStatus: (BOOL)hide saveValue: (BOOL)save{
+    self.picker.hidden = hide;
+    self.pickerToolbar.hidden = hide;
+    if (save) {
+        self.radius = [_pickerData[[self.picker selectedRowInComponent:0]] integerValue];
+        self.pickerRow = [self.picker selectedRowInComponent:0];
+        [self.changeRadiusButton setTitle:[NSString stringWithFormat:@"Radius: %lu miles", self.radius] forState:UIControlStateNormal];
+    }
+    // only works on text views.
+//    if (self.picker.hidden) {
+//        [self.changeRadiusButton resignFirstResponder];
+//        [self.changeRadiusButton resignFirstResponder];
+//    }
+    
 }
 @end
