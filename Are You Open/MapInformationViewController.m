@@ -28,7 +28,8 @@
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *hoursLabelCollection;
 @property (weak, nonatomic) IBOutlet UIButton *addressButton;
 @property (weak, nonatomic) IBOutlet UIButton *numberButton;
-@property (strong, nonatomic) UIAlertController* ac;
+@property (strong, nonatomic) UIAlertController* numAlert;
+@property (strong, nonatomic) UIAlertController* addressAlert;
 
 @end
 
@@ -72,8 +73,8 @@
 {
     [super viewDidLoad];
 //    [self doAnimation];
-    [self loadAlertController];
-    
+    self.numAlert = [self loadAlertController:[self.storeDictionary objectForKey:@"formatted_phone_number"]];
+    self.addressAlert = [self loadAlertController:[self.storeDictionary objectForKey:@"vicinity"]];
     
     // Set the labels.
     [self.navTitle setText:[self.storeDictionary objectForKey:@"name"]];
@@ -155,26 +156,28 @@
 # pragma mark UIButton Actions
 - (IBAction)addressButtonPressed:(id)sender
 {
-    [self presentViewController:self.ac animated:YES completion:nil];
+    [self presentViewController:self.numAlert animated:YES completion:nil];
 }
 
 - (IBAction)numberButtonPressed:(id)sender
 {
+    [self presentViewController:self.addressAlert animated:YES completion:nil];
 }
 
 #pragma mark Setup
-- (void)loadAlertController
+- (UIAlertController *)loadAlertController:(NSString *)string
 {
-    self.ac = [[UIAlertController alloc] init];
-    self.ac = [UIAlertController alertControllerWithTitle:nil message:@"Replace This" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:string preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"Copy" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UIPasteboard *pb = [UIPasteboard generalPasteboard];
         [pb setPersistent:YES];
-        [pb setString:@"Whatever text will be stored here"];
+        [pb setString:string];
+        NSLog(@"Copied in the following string: %@", string);
     }];
-    [self.ac addAction:cancelAction];
-    [self.ac addAction:copyAction];
+    [ac addAction:cancelAction];
+    [ac addAction:copyAction];
+    return ac;
 }
 
 @end
