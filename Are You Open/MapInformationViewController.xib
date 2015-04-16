@@ -7,10 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapInformationViewController">
             <connections>
+                <outlet property="addressButton" destination="Flm-jg-wmN" id="amY-Rz-HTP"/>
                 <outlet property="backButton" destination="Guk-c2-rT8" id="Ja2-nG-qqL"/>
                 <outlet property="googleMapsView" destination="aUL-bB-UuJ" id="jH1-Dc-qdi"/>
                 <outlet property="navTitle" destination="tYQ-gE-gtd" id="JlP-Hw-w56"/>
                 <outlet property="noOpenHoursLabel" destination="o2k-4N-8KN" id="YLd-rZ-yGD"/>
+                <outlet property="numberButton" destination="6Hs-dV-Eod" id="HF3-Xn-LJX"/>
                 <outlet property="openHoursView" destination="Fz7-7J-4TV" id="cqm-A6-j4D"/>
                 <outlet property="openIndicator" destination="QZP-6n-aQW" id="HxO-8B-HIv"/>
                 <outlet property="openIndicatorAnimate" destination="XJp-fT-r4S" id="6pQ-4e-6lw"/>
@@ -191,6 +193,9 @@
                             <state key="normal" title="Copy Address">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="addressButtonPressed:" destination="-1" eventType="touchUpInside" id="iyr-XM-9GR"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hs-dV-Eod">
                             <rect key="frame" x="204" y="271" width="96" height="30"/>
@@ -198,6 +203,9 @@
                             <state key="normal" title="Copy Number">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="numberButtonPressed:" destination="-1" eventType="touchUpInside" id="sfn-fT-nw7"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-6n-aQW" userLabel="Open Indicator">
                             <rect key="frame" x="297" y="13" width="12" height="12"/>

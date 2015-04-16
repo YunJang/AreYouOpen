@@ -26,7 +26,9 @@
 @property (weak, nonatomic) IBOutlet UIView *openIndicator;
 @property (weak, nonatomic) IBOutlet UIView *openIndicatorAnimate;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *hoursLabelCollection;
-
+@property (weak, nonatomic) IBOutlet UIButton *addressButton;
+@property (weak, nonatomic) IBOutlet UIButton *numberButton;
+@property (strong, nonatomic) UIAlertController* ac;
 
 @end
 
@@ -70,7 +72,9 @@
 {
     [super viewDidLoad];
 //    [self doAnimation];
-
+    [self loadAlertController];
+    
+    
     // Set the labels.
     [self.navTitle setText:[self.storeDictionary objectForKey:@"name"]];
     [self.navTitle setAdjustsFontSizeToFitWidth:YES];
@@ -146,6 +150,31 @@
 - (void) doAnimation
 {
     // Look up Core Animation.
+}
+
+# pragma mark UIButton Actions
+- (IBAction)addressButtonPressed:(id)sender
+{
+    [self presentViewController:self.ac animated:YES completion:nil];
+}
+
+- (IBAction)numberButtonPressed:(id)sender
+{
+}
+
+#pragma mark Setup
+- (void)loadAlertController
+{
+    self.ac = [[UIAlertController alloc] init];
+    self.ac = [UIAlertController alertControllerWithTitle:nil message:@"Replace This" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"Copy" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIPasteboard *pb = [UIPasteboard generalPasteboard];
+        [pb setPersistent:YES];
+        [pb setString:@"Whatever text will be stored here"];
+    }];
+    [self.ac addAction:cancelAction];
+    [self.ac addAction:copyAction];
 }
 
 @end

@@ -97,8 +97,6 @@
                         stringByAppendingString:[self parsedString]]
                         stringByAppendingString:GooglePlacesAPIKey]];
     
-    NSLog(@"URL: %@", [jsonURL description]);
-    
     // Once Nearby JSON is obtained, get the Details JSON.
     NSURLRequest *request = [NSURLRequest requestWithURL:jsonURL];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
