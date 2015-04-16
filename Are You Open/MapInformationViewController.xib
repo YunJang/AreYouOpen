@@ -10,6 +10,7 @@
                 <outlet property="addressButton" destination="Flm-jg-wmN" id="amY-Rz-HTP"/>
                 <outlet property="backButton" destination="Guk-c2-rT8" id="Ja2-nG-qqL"/>
                 <outlet property="googleMapsView" destination="aUL-bB-UuJ" id="jH1-Dc-qdi"/>
+                <outlet property="hoursView" destination="gqJ-UE-63F" id="MS6-Yg-mf3"/>
                 <outlet property="navTitle" destination="tYQ-gE-gtd" id="JlP-Hw-w56"/>
                 <outlet property="noOpenHoursLabel" destination="o2k-4N-8KN" id="YLd-rZ-yGD"/>
                 <outlet property="numberButton" destination="6Hs-dV-Eod" id="HF3-Xn-LJX"/>

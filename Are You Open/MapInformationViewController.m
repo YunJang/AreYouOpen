@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *numberButton;
 @property (strong, nonatomic) UIAlertController* numAlert;
 @property (strong, nonatomic) UIAlertController* addressAlert;
+@property (weak, nonatomic) IBOutlet UIView *hoursView;
 
 @end
 
@@ -100,6 +101,7 @@
     }
     else
     {
+        [self.hoursView setAlpha:0];
         [self.noOpenHoursLabel setAlpha:1];
     }
     
@@ -173,7 +175,6 @@
         UIPasteboard *pb = [UIPasteboard generalPasteboard];
         [pb setPersistent:YES];
         [pb setString:string];
-        NSLog(@"Copied in the following string: %@", string);
     }];
     [ac addAction:cancelAction];
     [ac addAction:copyAction];
