@@ -99,16 +99,7 @@
     [self updatePickerHiddenStatus:YES saveValue:NO picker:self.picker];
     
     // Generate the URL to fetch the JSON.
-    /* I absolutely dislike how this looks. Might as well just create a method to make thing better looking. */
-    NSURL *jsonURL = [NSURL URLWithString:[[[[[[[[GooglePlacesNearbyJSONURL
-                        stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
-                        stringByAppendingString:GooglePlacesDistance]
-                        stringByAppendingString:[[NSNumber numberWithLong:self.radius * METERS] stringValue]]
-                        stringByAppendingString:GooglePlacesCategory]
-                        stringByAppendingString:[_categoryData[[self.categoryPicker selectedRowInComponent:0]] lowercaseString]]
-                        stringByAppendingString:GooglePlacesName]
-                        stringByAppendingString:[self parsedString]]
-                        stringByAppendingString:GooglePlacesAPIKey]];
+    NSURL *jsonURL = [NSURL URLWithString:[self buildGoogleURL:[self parsedString]]];
     
     // Once Nearby JSON is obtained, get the Details JSON.
     NSURLRequest *request = [NSURLRequest requestWithURL:jsonURL];
@@ -146,6 +137,7 @@
     }];
     
     [operation start];
+    [self.searchBar setText:@""];
 }
 
 - (IBAction)searchNearbyButtonTouchUp:(id)sender
@@ -154,14 +146,7 @@
     [self.searchNearbyButton setUserInteractionEnabled:NO];
     [self updatePickerHiddenStatus:YES saveValue:NO picker:self.picker];
     
-    NSURL *jsonURL = [NSURL URLWithString:[[[[[[[GooglePlacesNearbyJSONURL
-                                                 stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
-                                                stringByAppendingString:GooglePlacesDistance]
-                                               stringByAppendingString:[[NSNumber numberWithLong:self.radius * METERS] stringValue]]
-                                              stringByAppendingString:GooglePlacesCategory]
-                                             stringByAppendingString:[_categoryData[[self.categoryPicker selectedRowInComponent:0]] lowercaseString]]
-                                             stringByAppendingString:GooglePlacesName]
-                                           stringByAppendingString:GooglePlacesAPIKey]];
+    NSURL *jsonURL = [NSURL URLWithString:[self buildGoogleURL:@""]];
     
     // Once Nearby JSON is obtained, get the Details JSON.
     NSURLRequest *request = [NSURLRequest requestWithURL:jsonURL];
@@ -202,11 +187,10 @@
     }];
     
     [operation start];
-
-
+    [self.searchBar setText:@""];
 }
 
-#pragma mark UITextFieldViewDelegate
+#pragma mark UITextField
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -235,6 +219,21 @@
     self.categoryPicker.delegate = self;
     [self.categoryPicker selectRow:0 inComponent:0 animated:YES];
     [self updatePickerHiddenStatus:YES saveValue:YES picker:self.categoryPicker];
+}
+
+# pragma mark Helper Methods
+- (NSString *)buildGoogleURL:(NSString *)searchParam
+{
+    NSString *urlString = [[[[[[[[GooglePlacesNearbyJSONURL stringByAppendingString:
+                           [NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
+                           stringByAppendingString:GooglePlacesDistance]
+                           stringByAppendingString:[[NSNumber numberWithLong:self.radius * METERS] stringValue]]
+                           stringByAppendingString:GooglePlacesCategory]
+                           stringByAppendingString:[_categoryData[[self.categoryPicker selectedRowInComponent:0]] lowercaseString]]
+                           stringByAppendingString:GooglePlacesName]
+                           stringByAppendingString:searchParam]
+                           stringByAppendingString:GooglePlacesAPIKey];
+    return urlString;
 }
 
 # pragma mark ButtonUIStyle
@@ -271,12 +270,9 @@
         return _pickerData.count;
     else if (pickerView.tag == 2)
         return _categoryData.count;
-
-    // Should never reach here.
     return 0;
 }
 
-// to display actual text
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if (pickerView.tag == 1)
