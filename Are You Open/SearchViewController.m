@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property long radius;
 @property long pickerRow;
+@property NSString *category;
+@property long categoryRow;
 @property id currentPicker;
 
 @end
@@ -96,11 +98,13 @@
     [self updatePickerHiddenStatus:YES saveValue:NO picker:self.picker];
     
     // Generate the URL to fetch the JSON.
-    NSURL *jsonURL = [NSURL URLWithString:[[[[[[[GooglePlacesNearbyJSONURL
+    /* I absolutely dislike how this looks. Might as well just create a method to make thing better looking. */
+    NSURL *jsonURL = [NSURL URLWithString:[[[[[[[[GooglePlacesNearbyJSONURL
                         stringByAppendingString:[NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
                         stringByAppendingString:GooglePlacesDistance]
                         stringByAppendingString:[[NSNumber numberWithLong:self.radius * METERS] stringValue]]
                         stringByAppendingString:GooglePlacesCategory]
+                        stringByAppendingString:[_categoryData[[self.categoryPicker selectedRowInComponent:0]] lowercaseString]]
                         stringByAppendingString:GooglePlacesName]
                         stringByAppendingString:[self parsedString]]
                         stringByAppendingString:GooglePlacesAPIKey]];
@@ -153,8 +157,8 @@
                                                 stringByAppendingString:GooglePlacesDistance]
                                                stringByAppendingString:[[NSNumber numberWithLong:self.radius * METERS] stringValue]]
                                               stringByAppendingString:GooglePlacesCategory]
+                                             stringByAppendingString:[_categoryData[[self.categoryPicker selectedRowInComponent:0]] lowercaseString]]
                                              stringByAppendingString:GooglePlacesName]
-                                            stringByAppendingString:[self parsedString]]
                                            stringByAppendingString:GooglePlacesAPIKey]];
     
     // Once Nearby JSON is obtained, get the Details JSON.
@@ -224,8 +228,6 @@
 
 - (void)loadCategoryData
 {
-    // To add categories, need to have two separate picker views
-    // Probably gonna need to use tags in order to be able to distinguish delegation and data sources.
     _categoryData = @[@"Food", @"Bar", @"Cafe"];
     self.categoryPicker.dataSource = self;
     self.categoryPicker.delegate = self;
@@ -284,6 +286,7 @@
 
 /* Can do some refactoring here. I'll get to it soon. */
 - (IBAction)changeRadius:(id)sender {
+    [self updatePickerHiddenStatus:YES saveValue:YES picker:self.currentPicker];
     [self updatePickerHiddenStatus:NO saveValue:NO picker:self.picker];
     [self.picker selectRow:self.pickerRow inComponent:0 animated:YES];
     self.currentPicker = self.picker;
@@ -291,8 +294,9 @@
 
 - (IBAction)changeCategory:(id)sender
 {
+    [self updatePickerHiddenStatus:YES saveValue:YES picker:self.currentPicker];
     [self updatePickerHiddenStatus:NO saveValue:NO picker:self.categoryPicker];
-    [self.categoryPicker selectRow:self.pickerRow inComponent:0 animated:YES];
+    [self.categoryPicker selectRow:self.categoryRow inComponent:0 animated:YES];
     self.currentPicker = self.categoryPicker;
 }
 
@@ -305,14 +309,18 @@
 
 - (void)updatePickerHiddenStatus:(BOOL)hide saveValue:(BOOL)save picker:(UIPickerView *)picker
 {
-    assert ([picker isKindOfClass:[UIPickerView class]]);
-    assert ([self.pickerToolbar isKindOfClass:[UIToolbar class]]);
     picker.hidden = hide;
     self.pickerToolbar.hidden = hide;
+    
     if (picker.tag == 1 && save) {
         self.radius = [_pickerData[[self.picker selectedRowInComponent:0]] integerValue];
         self.pickerRow = [picker selectedRowInComponent:0];
         [self.changeRadiusButton setTitle:[NSString stringWithFormat:@"Radius: %lu miles", self.radius] forState:UIControlStateNormal];
+    }
+    if (picker.tag == 2 && save)
+    {
+        self.categoryRow = [picker selectedRowInComponent:0];
+        [self.categoryButton setTitle:[NSString stringWithFormat:@"Type: %@", _categoryData[self.categoryRow]] forState:UIControlStateNormal];
     }
 }
 @end
