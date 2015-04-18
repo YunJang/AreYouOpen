@@ -150,7 +150,7 @@
 
 - (IBAction)searchNearbyButtonTouchUp:(id)sender
 {
-    [self.searchBar resignFirstResponder];l
+    [self.searchBar resignFirstResponder];
     [self.searchNearbyButton setUserInteractionEnabled:NO];
     [self updatePickerHiddenStatus:YES saveValue:NO picker:self.picker];
     
