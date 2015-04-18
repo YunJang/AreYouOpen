@@ -85,7 +85,7 @@
         if (i == [arr count] - 1)
             locationString = [locationString stringByAppendingString:[arr objectAtIndex:i]];
         else
-            locationString = [[locationString stringByAppendingString:[arr objectAtIndex:i]] stringByAppendingString:@"%20"]; // I need to test this out some more.
+            locationString = [[locationString stringByAppendingString:[arr objectAtIndex:i]] stringByAppendingString:@"%20"]; // Double check why it was left as %20.
     }
     return locationString;
 }
@@ -99,7 +99,8 @@
     [self updatePickerHiddenStatus:YES saveValue:NO picker:self.picker];
     
     // Generate the URL to fetch the JSON.
-    NSURL *jsonURL = [NSURL URLWithString:[self buildGoogleURL:[self parsedString]]];
+    NSString *searchParam = [self parsedString];
+    NSURL *jsonURL = [NSURL URLWithString:[self buildGoogleURL:searchParam]];
     
     // Once Nearby JSON is obtained, get the Details JSON.
     NSURLRequest *request = [NSURLRequest requestWithURL:jsonURL];
@@ -119,7 +120,7 @@
         
         ResultsViewController *vc = [[ResultsViewController alloc] init];
         [vc setPlacesArr:placesArr];
-        [vc setSearchTitle:[self parsedString]];
+        [vc setSearchTitle:searchParam];
         [self.navigationController pushViewController:vc animated:YES];
         [self.searchBar setText:@""];
         
