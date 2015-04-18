@@ -115,29 +115,19 @@
         
         // Add the name, place_id, and vicinity into a dictionary and add it into an array.
         NSMutableArray *placesArr = [[NSMutableArray alloc] init];
-        for (int i = 0; i < [nearbyResults count]; ++i)
-        {
-            NSDictionary *placeDic = [nearbyResults objectAtIndex:i];
-            NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
-            [tempDic setObject:[placeDic objectForKey:@"name"] forKey:@"name"];
-            [tempDic setObject:[placeDic objectForKey:@"place_id"] forKey:@"place_id"];
-            [tempDic setObject:[placeDic objectForKey:@"vicinity"] forKey:@"vicinity"];
-            if ([placeDic objectForKey:@"opening_hours"]) [tempDic setObject:[[placeDic objectForKey:@"opening_hours"] objectForKey:@"open_now"] forKey:@"open_now"];
-            else    [tempDic setObject:@"nil_info" forKey:@"open_now"];
-            [placesArr addObject:tempDic];
-        }
+        [self storeNearbyInformation:nearbyResults inArray:placesArr];
         
         ResultsViewController *vc = [[ResultsViewController alloc] init];
         [vc setPlacesArr:placesArr];
         [vc setSearchTitle:[self parsedString]];
         [self.navigationController pushViewController:vc animated:YES];
+        [self.searchBar setText:@""];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"SearchViewController: %@", [error localizedDescription]);
     }];
     
     [operation start];
-    [self.searchBar setText:@""];
 }
 
 - (IBAction)searchNearbyButtonTouchUp:(id)sender
@@ -162,32 +152,17 @@
 
         // Add the name, place_id, and vicinity into a dictionary and add it into an array.
         NSMutableArray *placesArr = [[NSMutableArray alloc] init];
-        for (int i = 0; i < [nearbyResults count]; ++i)
-        {
-            NSDictionary *placeDic = [nearbyResults objectAtIndex:i];
-            NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
-            [tempDic setObject:[placeDic objectForKey:@"name"] forKey:@"name"];
-            [tempDic setObject:[placeDic objectForKey:@"place_id"] forKey:@"place_id"];
-            [tempDic setObject:[placeDic objectForKey:@"vicinity"] forKey:@"vicinity"];
-            [tempDic setObject:[placeDic valueForKeyPath:@"geometry.location"] forKey:@"location"];
-            if ([placeDic valueForKeyPath:@"opening_hours.open_now"]) {
-                [tempDic setObject:[placeDic valueForKeyPath:@"opening_hours.open_now"] forKey:@"open_now"];
-            }
-            else {
-                [tempDic setObject:@"nil_info" forKey:@"open_now"];
-            }
-            [placesArr addObject:tempDic];
-        }
+        [self storeNearbyInformation:nearbyResults inArray:placesArr];
         
         CloseToMeViewController *vc = [[CloseToMeViewController alloc] initWithArray:placesArr currentLocation:self.currentLocation];
         [self.navigationController pushViewController:vc animated:YES];
+        [self.searchBar setText:@""];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"NearbyViewController: %@", [error localizedDescription]);
     }];
     
     [operation start];
-    [self.searchBar setText:@""];
 }
 
 #pragma mark UITextField
@@ -234,6 +209,22 @@
                            stringByAppendingString:searchParam]
                            stringByAppendingString:GooglePlacesAPIKey];
     return urlString;
+}
+
+- (void)storeNearbyInformation:(NSArray *)nearbyResults inArray:(NSMutableArray *)placesArr
+{
+    for (int i = 0; i < [nearbyResults count]; ++i)
+    {
+        NSDictionary *placeDic = [nearbyResults objectAtIndex:i];
+        NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
+        [tempDic setObject:[placeDic objectForKey:@"name"] forKey:@"name"];
+        [tempDic setObject:[placeDic objectForKey:@"place_id"] forKey:@"place_id"];
+        [tempDic setObject:[placeDic objectForKey:@"vicinity"] forKey:@"vicinity"];
+        [tempDic setObject:[placeDic valueForKeyPath:@"geometry.location"] forKey:@"location"];
+        if ([placeDic valueForKeyPath:@"opening_hours.open_now"])   [tempDic setObject:[placeDic valueForKeyPath:@"opening_hours.open_now"] forKey:@"open_now"];
+        else                                                        [tempDic setObject:@"nil_info" forKey:@"open_now"];
+        [placesArr addObject:tempDic];
+    }
 }
 
 # pragma mark ButtonUIStyle
