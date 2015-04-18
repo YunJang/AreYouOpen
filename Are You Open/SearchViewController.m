@@ -94,6 +94,7 @@
 
 - (IBAction)searchButtonTouchUpInside:(id)sender
 {
+    [self.searchBar resignFirstResponder];
     [self.searchButton setUserInteractionEnabled:NO];
     [self updatePickerHiddenStatus:YES saveValue:NO picker:self.picker];
     
@@ -149,6 +150,7 @@
 
 - (IBAction)searchNearbyButtonTouchUp:(id)sender
 {
+    [self.searchBar resignFirstResponder];l
     [self.searchNearbyButton setUserInteractionEnabled:NO];
     [self updatePickerHiddenStatus:YES saveValue:NO picker:self.picker];
     
