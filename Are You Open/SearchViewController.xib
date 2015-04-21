@@ -26,6 +26,9 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="cGb-my-BOF" userLabel="Background">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="nvG-Fk-R5o">
+                    <rect key="frame" x="21" y="129" width="278" height="31"/>
+                </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for a store..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Not-Ue-b0D" userLabel="Search Bar">
                     <rect key="frame" x="20" y="182" width="280" height="30"/>
                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="14"/>
@@ -93,8 +96,8 @@
                 <pickerView tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcO-HB-8Eh" userLabel="Category Picker View">
                     <rect key="frame" x="0.0" y="406" width="320" height="162"/>
                 </pickerView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="nvG-Fk-R5o">
-                    <rect key="frame" x="21" y="129" width="278" height="31"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="UW7-mL-mOf">
+                    <rect key="frame" x="103" y="67" width="114" height="60"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -102,6 +105,7 @@
     </objects>
     <resources>
         <image name="bg" width="1080" height="1920"/>
+        <image name="logo" width="400" height="215"/>
         <image name="title" width="1080" height="125"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
