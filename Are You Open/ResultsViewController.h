@@ -10,7 +10,8 @@
 
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSArray *placesArr;
+//@property (strong, nonatomic) NSArray *placesArr;
 @property (strong, nonatomic) NSString *searchTitle;
+@property (strong, nonatomic) NSURL *urlData;
 
 @end

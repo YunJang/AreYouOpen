@@ -102,33 +102,11 @@
     NSString *searchParam = [self parsedString];
     NSURL *jsonURL = [NSURL URLWithString:[self buildGoogleURL:searchParam]];
     
-    // Once Nearby JSON is obtained, get the Details JSON.
-    NSURLRequest *request = [NSURLRequest requestWithURL:jsonURL];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject) {
-        
-        // Work here.
-        // Do error checking to make sure query is valid.
-        // Check the results and get the specific data into a dictionary to send to next view controller.
-        // Data needed: name, place_id, address.
-        NSArray *nearbyResults = [responseObject objectForKey:@"results"];
-        
-        // Add the name, place_id, and vicinity into a dictionary and add it into an array.
-        NSMutableArray *placesArr = [[NSMutableArray alloc] init];
-        [self storeNearbyInformation:nearbyResults inArray:placesArr];
-        
-        ResultsViewController *vc = [[ResultsViewController alloc] init];
-        [vc setPlacesArr:placesArr];
-        [vc setSearchTitle:searchParam];
-        [self.navigationController pushViewController:vc animated:YES];
-        [self.searchBar setText:@""];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"SearchViewController: %@", [error localizedDescription]);
-    }];
-    
-    [operation start];
+    ResultsViewController *vc = [[ResultsViewController alloc] init];
+    [vc setSearchTitle:searchParam];
+    [vc setUrlData:jsonURL];
+    [self.navigationController pushViewController:vc animated:YES];
+    [self.searchBar setText:@""];
 }
 
 - (IBAction)searchNearbyButtonTouchUp:(id)sender
@@ -145,10 +123,6 @@
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject) {
         
-        // Work here.
-        // Do error checking to make sure query is valid.
-        // Check the results and get the specific data into a dictionary to send to next view controller.
-        // Data needed: name, place_id, address.
         NSArray *nearbyResults = [responseObject objectForKey:@"results"];
 
         // Add the name, place_id, and vicinity into a dictionary and add it into an array.

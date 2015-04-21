@@ -15,9 +15,17 @@
 @interface ResultsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *searchLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *placesArr;
 @end
 
 @implementation ResultsViewController
+
+- (NSMutableArray *)placesArr
+{
+    if (!_placesArr)
+        _placesArr = [[NSMutableArray alloc] init];
+    return _placesArr;
+}
 
 - (void)viewDidLoad
 {
@@ -28,6 +36,47 @@
     [self.tableView setDataSource:self];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CustomResultsCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"ResultsTableViewCell" bundle:nil] forCellReuseIdentifier:@"CustomResultsCell"];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self getResultsJSONData:self.urlData];
+    });
+}
+
+#pragma mark Setup
+- (void)getResultsJSONData:(NSURL *)url
+{
+    // Once Nearby JSON is obtained, get the Details JSON.
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject) {
+        // Add the name, place_id, and vicinity into a dictionary and add it into an array.
+        NSArray *nearbyResults = [responseObject objectForKey:@"results"];
+        [self storeNearbyInformation:nearbyResults];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"SearchViewController: %@", [error localizedDescription]);
+    }];
+    
+    [operation start];
+}
+
+- (void)storeNearbyInformation:(NSArray *)nearbyResults
+{
+    for (int i = 0; i < [nearbyResults count]; ++i)
+    {
+        NSDictionary *placeDic = [nearbyResults objectAtIndex:i];
+        NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
+        [tempDic setObject:[placeDic objectForKey:@"name"] forKey:@"name"];
+        [tempDic setObject:[placeDic objectForKey:@"place_id"] forKey:@"place_id"];
+        [tempDic setObject:[placeDic objectForKey:@"vicinity"] forKey:@"vicinity"];
+        [tempDic setObject:[placeDic valueForKeyPath:@"geometry.location"] forKey:@"location"];
+        if ([placeDic valueForKeyPath:@"opening_hours.open_now"])   [tempDic setObject:[placeDic valueForKeyPath:@"opening_hours.open_now"] forKey:@"open_now"];
+        else                                                        [tempDic setObject:@"nil_info" forKey:@"open_now"];
+        [self.placesArr addObject:tempDic];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (IBAction)backButtonTouchUpInside:(id)sender
