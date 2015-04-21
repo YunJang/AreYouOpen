@@ -250,7 +250,7 @@
 
 /* Can do some refactoring here. I'll get to it soon. */
 - (IBAction)changeRadius:(id)sender {
-    [self updatePickerHiddenStatus:YES saveValue:YES picker:self.currentPicker];
+    [self updatePickerHiddenStatus:YES saveValue:NO picker:self.currentPicker];
     [self updatePickerHiddenStatus:NO saveValue:NO picker:self.picker];
     [self.picker selectRow:self.pickerRow inComponent:0 animated:YES];
     self.currentPicker = self.picker;
@@ -258,7 +258,7 @@
 
 - (IBAction)changeCategory:(id)sender
 {
-    [self updatePickerHiddenStatus:YES saveValue:YES picker:self.currentPicker];
+    [self updatePickerHiddenStatus:YES saveValue:NO picker:self.currentPicker];
     [self updatePickerHiddenStatus:NO saveValue:NO picker:self.categoryPicker];
     [self.categoryPicker selectRow:self.categoryRow inComponent:0 animated:YES];
     self.currentPicker = self.categoryPicker;
