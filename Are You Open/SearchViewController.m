@@ -207,7 +207,7 @@
 - (void) setBlueButtonRoundedRectangleStyle:(UIButton *)button
 {
     [button.layer setCornerRadius:4.0];
-    [button.layer setBorderColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0].CGColor];
+    [button.layer setBorderColor:[UIColor colorWithRed:79.0/255.0 green:167.0/255.0 blue:255.0/255.0 alpha:1.0].CGColor];
     [button.layer setBorderWidth:1.0];
     [button setBackgroundColor:[UIColor whiteColor]];
 }
