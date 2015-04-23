@@ -85,8 +85,6 @@
     [self.storeAddress setText:[self.storeDictionary objectForKey:@"vicinity"]];
     [self.storePhoneNumber setText:[self.storeDictionary objectForKey:@"formatted_phone_number"]];
     [self.storeSite setText:[self.storeDictionary objectForKey:@"website"]];
-    [self setBlueButtonRoundedRectangleStyle:self.addressButton];
-    [self setBlueButtonRoundedRectangleStyle:self.numberButton];
     
     // If the hours are available, display them and display an indication of whether the store is open or not.
     if ([self.storeDictionary objectForKey:@"opening_hours"])

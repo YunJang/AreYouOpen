@@ -56,9 +56,9 @@
                                 <action selector="backButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="yXe-NH-mjL"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mR-7B-Ytp" userLabel="Home Button">
-                            <rect key="frame" x="292" y="32" width="20" height="20"/>
-                            <state key="normal">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mR-7B-Ytp" userLabel="Home Button">
+                            <rect key="frame" x="281" y="30" width="24" height="24"/>
+                            <state key="normal" image="homebutton">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -206,24 +206,13 @@ We couldn't get the hours for you!</string>
                                 </view>
                             </subviews>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Flm-jg-wmN">
-                            <rect key="frame" x="20" y="271" width="103" height="30"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
-                            <state key="normal" title="Copy Address">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Flm-jg-wmN">
+                            <rect key="frame" x="20" y="271" width="32" height="32"/>
+                            <state key="normal" image="addressbutton">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="addressButtonPressed:" destination="-1" eventType="touchUpInside" id="iyr-XM-9GR"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hs-dV-Eod">
-                            <rect key="frame" x="204" y="271" width="96" height="30"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
-                            <state key="normal" title="Copy Number">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="numberButtonPressed:" destination="-1" eventType="touchUpInside" id="sfn-fT-nw7"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-6n-aQW" userLabel="Open Indicator">
@@ -234,13 +223,22 @@ We couldn't get the hours for you!</string>
                             <rect key="frame" x="297" y="13" width="12" height="12"/>
                             <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcG-6s-ebr" userLabel="Map Button">
-                            <rect key="frame" x="137" y="271" width="46" height="30"/>
-                            <state key="normal">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcG-6s-ebr" userLabel="Map Button">
+                            <rect key="frame" x="144" y="271" width="32" height="32"/>
+                            <state key="normal" image="mapbutton">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="mapButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="QHp-9V-HCU"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hs-dV-Eod" userLabel="Phone Button">
+                            <rect key="frame" x="268" y="271" width="32" height="32"/>
+                            <state key="normal" image="phonebutton">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="numberButtonPressed:" destination="-1" eventType="touchUpInside" id="sfn-fT-nw7"/>
                             </connections>
                         </button>
                     </subviews>
@@ -256,6 +254,10 @@ We couldn't get the hours for you!</string>
     </objects>
     <resources>
         <image name="BackButton" width="256" height="256"/>
+        <image name="addressbutton" width="256" height="256"/>
+        <image name="homebutton" width="128" height="128"/>
+        <image name="mapbutton" width="256" height="256"/>
+        <image name="phonebutton" width="256" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
