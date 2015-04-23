@@ -7,6 +7,7 @@
 //
 
 #import "MapInformationViewController.h"
+#import "LocationManagerSingleton.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @interface MapInformationViewController () <GMSMapViewDelegate>
@@ -135,6 +136,21 @@
 - (IBAction)homeButtonTouchUpInside:(id)sender
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (IBAction)mapButtonTouchUpInside:(id)sender
+{
+    NSDictionary *locationDict = [self.storeDictionary valueForKeyPath:@"geometry.location"];
+    NSString *lat = [locationDict objectForKey:@"lat"];
+    NSString *lng = [locationDict objectForKey:@"lng"];
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);
+    MKPlacemark *placeMark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
+    MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placeMark];
+    [mapItem setName:[self.storeDictionary objectForKey:@"name"]];
+
+    NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
+    MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
+    [MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem] launchOptions:launchOptions];
 }
 
 #pragma mark UI Updates
