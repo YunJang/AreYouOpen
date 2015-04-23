@@ -125,9 +125,16 @@
     [self.googleMapsView addSubview:mapView];
 }
 
+#pragma mark UIButton
+
 - (IBAction)backButtonTouchUpInside:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)homeButtonTouchUpInside:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark UI Updates

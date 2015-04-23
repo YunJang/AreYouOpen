@@ -46,7 +46,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Guk-c2-rT8">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Guk-c2-rT8" userLabel="Back Button">
                             <rect key="frame" x="13" y="32" width="20" height="20"/>
                             <state key="normal" image="BackButton">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,6 +54,15 @@
                             </state>
                             <connections>
                                 <action selector="backButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="yXe-NH-mjL"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mR-7B-Ytp" userLabel="Home Button">
+                            <rect key="frame" x="292" y="32" width="20" height="20"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="homeButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Sk4-bv-9DV"/>
                             </connections>
                         </button>
                     </subviews>
