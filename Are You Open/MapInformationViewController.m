@@ -186,7 +186,17 @@
 
 - (IBAction)numberButtonPressed:(id)sender
 {
-    [self presentViewController:self.numAlert animated:YES completion:nil];
+    // get rid of space
+    NSString *phoneNumber = [NSString stringWithFormat:@"%@", [self.storePhoneNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    // make phone number url
+    phoneNumber = [NSString stringWithFormat:@"tel://%@", phoneNumber];
+    NSLog(@"%@", phoneNumber);
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:phoneNumber]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+    }
+    else {
+        NSLog(@"Error: can't open phone app with URL");
+    }
 }
 
 #pragma mark Setup
