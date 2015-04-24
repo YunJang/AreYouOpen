@@ -207,7 +207,7 @@ We couldn't get the hours for you!</string>
                             </subviews>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Flm-jg-wmN">
-                            <rect key="frame" x="20" y="271" width="32" height="32"/>
+                            <rect key="frame" x="20" y="259" width="44" height="44"/>
                             <state key="normal" image="addressbutton">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -224,7 +224,7 @@ We couldn't get the hours for you!</string>
                             <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcG-6s-ebr" userLabel="Map Button">
-                            <rect key="frame" x="144" y="271" width="32" height="32"/>
+                            <rect key="frame" x="138" y="259" width="44" height="44"/>
                             <state key="normal" image="mapbutton">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -233,7 +233,7 @@ We couldn't get the hours for you!</string>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hs-dV-Eod" userLabel="Phone Button">
-                            <rect key="frame" x="268" y="271" width="32" height="32"/>
+                            <rect key="frame" x="256" y="259" width="44" height="44"/>
                             <state key="normal" image="phonebutton">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
