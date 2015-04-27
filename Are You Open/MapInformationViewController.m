@@ -41,7 +41,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -50,14 +49,7 @@
 {
     self = [super init];
     if (self)
-    {
-//        NSLog(@"%@", [dictionary objectForKey:@"opening_hours"]);
-//        NSLog(@"dictionary: %@", dictionary);
-//        for (id key in dictionary)
-//            NSLog(@"%@: %@", key, [dictionary objectForKey:key]);
-        
-        self.storeDictionary = dictionary;
-    }
+        _storeDictionary = dictionary;
     return self;
 }
 
@@ -65,7 +57,6 @@
 {
     [self setIndicatorStatus];
     
-    // Create a method for setting stuff UI stuff like this.
     [self.openHoursView.layer setCornerRadius:5.0];
     [self.openHoursView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
     [self.openHoursView.layer setBorderWidth:1.0];
@@ -74,9 +65,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self doAnimation];
-    self.numAlert = [self loadAlertController:[self.storeDictionary objectForKey:@"formatted_phone_number"]];
-    self.addressAlert = [self loadAlertController:[self.storeDictionary objectForKey:@"vicinity"]];
+    self.numAlert = [self loadNumberAlertController:[self.storeDictionary objectForKey:@"formatted_phone_number"]];
+    self.addressAlert = [self loadAddressAlertController:[self.storeDictionary objectForKey:@"vicinity"]];
     
     // Set the labels.
     [self.navTitle setText:[self.storeDictionary objectForKey:@"name"]];
@@ -186,21 +176,11 @@
 
 - (IBAction)numberButtonPressed:(id)sender
 {
-    // get rid of space
-    NSString *phoneNumber = [NSString stringWithFormat:@"%@", [self.storePhoneNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
-    // make phone number url
-    phoneNumber = [NSString stringWithFormat:@"tel://%@", phoneNumber];
-    NSLog(@"%@", phoneNumber);
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:phoneNumber]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
-    }
-    else {
-        NSLog(@"Error: can't open phone app with URL");
-    }
+    [self presentViewController:self.numAlert animated:YES completion:nil];
 }
 
 #pragma mark Setup
-- (UIAlertController *)loadAlertController:(NSString *)string
+- (UIAlertController *)loadAddressAlertController:(NSString *)string
 {
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:string preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
@@ -208,6 +188,28 @@
         UIPasteboard *pb = [UIPasteboard generalPasteboard];
         [pb setPersistent:YES];
         [pb setString:string];
+    }];
+    [ac addAction:cancelAction];
+    [ac addAction:copyAction];
+    return ac;
+}
+
+- (UIAlertController *)loadNumberAlertController:(NSString *)string
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:string preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"Call" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // get rid of space
+        NSString *phoneNumber = [NSString stringWithFormat:@"%@", [self.storePhoneNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        // make phone number url
+        phoneNumber = [NSString stringWithFormat:@"tel://%@", phoneNumber];
+        NSLog(@"%@", phoneNumber);
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:phoneNumber]]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+        }
+        else {
+            NSLog(@"Error: can't open phone app with URL");
+        }
     }];
     [ac addAction:cancelAction];
     [ac addAction:copyAction];
