@@ -11,11 +11,13 @@
 #import "AFNetworking.h"
 #import "MapInformationViewController.h"
 #import "ResultsTableViewCell.h"
+#import <iAd/iAd.h>
 
-@interface ResultsViewController ()
+@interface ResultsViewController () <ADBannerViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *searchLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *placesArr;
+@property (strong, nonatomic) IBOutlet ADBannerView *adBanner;
 @end
 
 @implementation ResultsViewController
@@ -36,6 +38,7 @@
     [self.tableView setDataSource:self];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CustomResultsCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"ResultsTableViewCell" bundle:nil] forCellReuseIdentifier:@"CustomResultsCell"];
+    [self initAdBanner];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [self getResultsJSONData:self.urlData];
@@ -136,6 +139,29 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44.0;
+}
+
+#pragma mark adBanner
+
+- (void)initAdBanner
+{
+    [self.adBanner setDelegate:self];
+    [self.adBanner setAlpha:0.0];
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 1.0;
+    }];
+}
+
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 0.0;
+    }];
 }
 
 @end

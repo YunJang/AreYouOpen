@@ -9,8 +9,9 @@
 #import "MapInformationViewController.h"
 #import "LocationManagerSingleton.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import <iAd/iAd.h>
 
-@interface MapInformationViewController () <GMSMapViewDelegate>
+@interface MapInformationViewController () <GMSMapViewDelegate, ADBannerViewDelegate>
 
 @property NSDictionary *storeDictionary;
 
@@ -32,7 +33,7 @@
 @property (strong, nonatomic) UIAlertController* numAlert;
 @property (strong, nonatomic) UIAlertController* addressAlert;
 @property (weak, nonatomic) IBOutlet UIView *hoursView;
-
+@property (strong, nonatomic) IBOutlet ADBannerView *adBanner;
 @end
 
 @implementation MapInformationViewController
@@ -65,6 +66,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    /* COMMENT IN TO ENABLE ADDS ON THIS VIEW */
+//    [self initAdBanner];
+    
     self.numAlert = [self loadNumberAlertController:[self.storeDictionary objectForKey:@"formatted_phone_number"]];
     self.addressAlert = [self loadAddressAlertController:[self.storeDictionary objectForKey:@"vicinity"]];
     
@@ -226,5 +230,33 @@
     [button.layer setBorderWidth:1.0];
     [button setBackgroundColor:[UIColor whiteColor]];
 }
+
+
+#pragma mark adBanner
+/*
+- (void)initAdBanner
+{
+    [self.adBanner setDelegate:self];
+    [self.adBanner setAlpha:0.0];
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 1.0;
+    }];
+}
+
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 0.0;
+    }];
+}
+*/
+
+
+
 
 @end

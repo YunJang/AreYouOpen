@@ -11,9 +11,10 @@
 #import "AFNetworking.h"
 #import "MapInformationViewController.h"
 #import "SMCalloutView.h"
+#import <iAd/iAd.h>
 
 
-@interface CloseToMeViewController () <GMSMapViewDelegate>
+@interface CloseToMeViewController () <GMSMapViewDelegate, ADBannerViewDelegate>
 
 @property (strong, nonatomic) NSArray *places;
 @property (weak, nonatomic) IBOutlet UIView *googleMapsView;
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) SMCalloutView *calloutView;
 @property (strong, nonatomic) UIView *emptyCalloutView;
+@property (strong, nonatomic) IBOutlet ADBannerView *adBanner;
 
 @end
 
@@ -31,17 +33,27 @@ static const CGFloat OFFSET = 40.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self initGoogleMaps];
+    [self initAdBanner];
+    [self initCalloutView];
+    [self addPlacesToMapView:self.mapView];
+}
+
+- (void)initGoogleMaps
+{
     // Initialize Google Maps based on search done on Google.
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.currentLocation.coordinate.latitude longitude:self.currentLocation.coordinate.longitude zoom:14];
     self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, self.googleMapsView.frame.size.width, self.googleMapsView.frame.size.height) camera:camera];
     [self.mapView setDelegate:self];
     self.mapView.settings.myLocationButton = YES;
-    
-    [self initCalloutView];
-    
-
     [self.mapView setMyLocationEnabled:YES];
-    [self addPlacesToMapView:self.mapView];
+}
+
+- (void)initAdBanner
+{
+    [self.adBanner setDelegate:self];
+    [self.adBanner setAlpha:0.0];
 }
 
 - (id)initWithArray:(NSArray *)array currentLocation:(CLLocation *)currentLocation
@@ -176,6 +188,23 @@ static const CGFloat OFFSET = 40.0f;
         }];
         [operation start];
     }
+}
+
+#pragma mark adBanner
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 1.0;
+    }];
+}
+
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 0.0;
+    }];
 }
 
 @end

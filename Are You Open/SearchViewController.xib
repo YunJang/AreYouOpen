@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController">
             <connections>
+                <outlet property="adBanner" destination="NBd-Pn-AQi" id="H8R-q9-ASN"/>
                 <outlet property="categoryButton" destination="Euk-jQ-CNA" id="WrW-tk-i9S"/>
                 <outlet property="categoryPicker" destination="fcO-HB-8Eh" id="Lnf-od-86g"/>
                 <outlet property="changeRadiusButton" destination="PsA-e1-Rjz" id="e71-rM-Fde"/>
@@ -46,7 +47,7 @@
                     </connections>
                 </button>
                 <pickerView tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WiQ-zt-TiD" userLabel="Radius Picker View">
-                    <rect key="frame" x="0.0" y="406" width="320" height="162"/>
+                    <rect key="frame" x="0.0" y="406" width="320" height="114"/>
                 </pickerView>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aD7-Z3-e3m">
                     <rect key="frame" x="0.0" y="362" width="320" height="44"/>
@@ -87,7 +88,7 @@
                     </connections>
                 </button>
                 <pickerView tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcO-HB-8Eh" userLabel="Category Picker View">
-                    <rect key="frame" x="0.0" y="406" width="320" height="162"/>
+                    <rect key="frame" x="0.0" y="406" width="320" height="114"/>
                 </pickerView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="UW7-mL-mOf">
                     <rect key="frame" x="103" y="67" width="114" height="60"/>
@@ -103,6 +104,9 @@
                         <action selector="searchButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="eJa-lV-MfC"/>
                     </connections>
                 </button>
+                <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-Pn-AQi">
+                    <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                </adBannerView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>

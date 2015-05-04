@@ -14,8 +14,9 @@
 #import "AFNetworking.h"
 #import <CoreLocation/CoreLocation.h>
 #import "CloseToMeViewController.h"
+#import <iAd/iAd.h>
 
-@interface SearchViewController () <UITextFieldDelegate, CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface SearchViewController () <UITextFieldDelegate, CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ADBannerViewDelegate>
 
 @property CLLocation *currentLocation;
 @property (weak, nonatomic) IBOutlet UITextField *searchBar;
@@ -31,6 +32,7 @@
 @property NSString *category;
 @property long categoryRow;
 @property id currentPicker;
+@property (strong, nonatomic) IBOutlet ADBannerView *adBanner;
 
 @end
 
@@ -69,6 +71,7 @@
     [self.searchBar setDelegate:self];
     [self loadPickerData];
     [self loadCategoryData];
+    [self initAdBanner];
     
     // Get your current location.
     [[LocationManagerSingleton singleton] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
@@ -287,4 +290,28 @@
         [self.categoryButton setTitle:[NSString stringWithFormat:@"Type: %@", _categoryData[self.categoryRow]] forState:UIControlStateNormal];
     }
 }
+
+#pragma mark adBanner
+
+- (void)initAdBanner
+{
+    [self.adBanner setDelegate:self];
+    [self.adBanner setAlpha:0.0];
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 1.0;
+    }];
+}
+
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 0.0;
+    }];
+}
+
 @end
