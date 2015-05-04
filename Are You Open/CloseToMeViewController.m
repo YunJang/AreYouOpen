@@ -35,6 +35,7 @@ static const CGFloat OFFSET = 40.0f;
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.currentLocation.coordinate.latitude longitude:self.currentLocation.coordinate.longitude zoom:14];
     self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, self.googleMapsView.frame.size.width, self.googleMapsView.frame.size.height) camera:camera];
     [self.mapView setDelegate:self];
+    self.mapView.settings.myLocationButton = YES;
     
     [self initCalloutView];
     
