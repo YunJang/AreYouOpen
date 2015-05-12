@@ -110,8 +110,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView setUserInteractionEnabled:NO];
-    NSURL *detailsURL = [NSURL URLWithString:[[GooglePlacesDetailsJSONURL
+    NSURL *detailsURL = [NSURL URLWithString:[[[GooglePlacesDetailsJSONURL
                                                stringByAppendingString:[[self.placesArr objectAtIndex:indexPath.row] objectForKey:@"place_id"]]
+                                              stringByAppendingString:GooglePlacesKey]
                                               stringByAppendingString:GooglePlacesAPIKey]];
     
     NSURLRequest *detailsRequest = [NSURLRequest requestWithURL:detailsURL];

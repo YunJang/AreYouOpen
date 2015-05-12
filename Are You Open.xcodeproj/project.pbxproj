@@ -85,7 +85,6 @@
 		B19FDF291ABA9F2500D9B506 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
 		B19FDF2A1ABA9F2500D9B506 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
 		B19FDF2B1ABA9F2500D9B506 /* ResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsViewController.xib; sourceTree = "<group>"; };
-		B1C68E771AC9F50B005D7A6B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B1C68E7D1ACA020E005D7A6B /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		B1C68E7F1ACA033D005D7A6B /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		B1C68E861ACA0CEB005D7A6B /* LocationManagerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManagerSingleton.h; sourceTree = "<group>"; };
@@ -221,7 +220,6 @@
 		B1F2E0091972495B00DED552 = {
 			isa = PBXGroup;
 			children = (
-				B1C68E771AC9F50B005D7A6B /* README.md */,
 				B13A0CF51AB0B61800F496C2 /* location.gpx */,
 				B1F2E01B1972495B00DED552 /* Are You Open */,
 				B1F2E0341972495B00DED552 /* Are You OpenTests */,

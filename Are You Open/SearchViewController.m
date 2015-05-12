@@ -177,7 +177,7 @@
 # pragma mark Helper Methods
 - (NSString *)buildGoogleURL:(NSString *)searchParam
 {
-    NSString *urlString = [[[[[[[[GooglePlacesNearbyJSONURL stringByAppendingString:
+    NSString *urlString = [[[[[[[[[GooglePlacesNearbyJSONURL stringByAppendingString:
                            [NSString stringWithFormat:@"%f,%f", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude]]
                            stringByAppendingString:GooglePlacesDistance]
                            stringByAppendingString:[[NSNumber numberWithLong:self.radius * METERS] stringValue]]
@@ -185,6 +185,7 @@
                            stringByAppendingString:[_categoryData[[self.categoryPicker selectedRowInComponent:0]] lowercaseString]]
                            stringByAppendingString:GooglePlacesName]
                            stringByAppendingString:searchParam]
+                           stringByAppendingString:GooglePlacesKey]
                            stringByAppendingString:GooglePlacesAPIKey];
     return urlString;
 }

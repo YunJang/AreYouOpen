@@ -8,10 +8,11 @@
 
 #import "Constants.h"
 
-// Example : https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.2884360,-97.7488920&radius=1610&types=food&name=whataburger&key=AIzaSyD4NMuYyaEkYMHe_mBLNbRLRNl9mcdp3Ds
+// Example : https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=<coordinate>&radius=<radius>&types=<category>&name=<search>&key=<key>
 
-// Google Maps
+// Keys
 NSString * const GoogleMapsAPIKey = @"AIzaSyC51rzHPoyeMvXvpSAXbuDMAnGlXvBgBUM";
+NSString * const GooglePlacesAPIKey = @"AIzaSyD4NMuYyaEkYMHe_mBLNbRLRNl9mcdp3Ds";
 
 // Google Places
 NSString * const GooglePlacesNearbyJSONURL = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
@@ -19,9 +20,7 @@ NSString * const GooglePlacesDetailsJSONURL = @"https://maps.googleapis.com/maps
 NSString * const GooglePlacesDistance = @"&radius=";
 NSString * const GooglePlacesCategory = @"&types=";
 NSString * const GooglePlacesName = @"&name=";
-//NSString * const GooglePlacesDistance = @"&radius=10000&types=food&name=";
-NSString * const GooglePlacesNearby = @"&radius=1600&types=food&name="; // radius ~1 mile
-NSString * const GooglePlacesAPIKey = @"&key=AIzaSyD4NMuYyaEkYMHe_mBLNbRLRNl9mcdp3Ds";
+NSString * const GooglePlacesKey = @"&key=";
 
 // Math
 long const METERS = 1609.34;

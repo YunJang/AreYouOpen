@@ -171,8 +171,9 @@ static const CGFloat OFFSET = 40.0f;
     GMSMarker *marker = self.mapView.selectedMarker;
     if (marker) {
         
-        NSURL *detailsURL = [NSURL URLWithString:[[GooglePlacesDetailsJSONURL
+        NSURL *detailsURL = [NSURL URLWithString:[[[GooglePlacesDetailsJSONURL
                                                    stringByAppendingString: [marker userData]]
+                                                  stringByAppendingString:GooglePlacesKey]
                                                   stringByAppendingString:GooglePlacesAPIKey]];
         
         NSURLRequest *detailsRequest = [NSURLRequest requestWithURL:detailsURL];

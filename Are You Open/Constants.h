@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-// Google Maps
+// Keys
 extern NSString * const GoogleMapsAPIKey;
+extern NSString * const GooglePlacesAPIKey;
 
 // Google Places
 extern NSString * const GooglePlacesNearbyJSONURL;
@@ -17,7 +18,5 @@ extern NSString * const GooglePlacesDetailsJSONURL;
 extern NSString * const GooglePlacesDistance;
 extern NSString * const GooglePlacesCategory;
 extern NSString * const GooglePlacesName;
-extern NSString * const GooglePlacesNearby;
-extern NSString * const GooglePlacesNearbyMap;
-extern NSString * const GooglePlacesAPIKey;
+extern NSString * const GooglePlacesKey;
 extern long const METERS;

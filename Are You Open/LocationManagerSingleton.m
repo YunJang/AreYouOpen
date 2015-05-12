@@ -49,7 +49,7 @@
 {
     // Get the latitude/longitude from our current location.
     CLLocation *location = [locations lastObject];
-//    NSLog(@"Location Updating Complete - Lat: %f | Lng: %f", location.coordinate.latitude, location.coordinate.longitude);
+    NSLog(@"Location Updating Complete - Lat: %f | Lng: %f", location.coordinate.latitude, location.coordinate.longitude);
     self.currentLocation = location;
     [manager stopUpdatingLocation];
 }
