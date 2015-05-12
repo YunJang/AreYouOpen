@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B1282A0D1B01FA8C000A80FF /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = B1282A0B1B01FA8C000A80FF /* Constants.m */; };
 		B12D48301AD9B3EF000EE732 /* ResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B12D482E1AD9B3EF000EE732 /* ResultsTableViewCell.m */; };
 		B12D48311AD9B3EF000EE732 /* ResultsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B12D482F1AD9B3EF000EE732 /* ResultsTableViewCell.xib */; };
 		B13A0CF61AB0B61800F496C2 /* location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = B13A0CF51AB0B61800F496C2 /* location.gpx */; };
@@ -29,7 +30,6 @@
 		B1F2E03B1972495B00DED552 /* Are_You_OpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F2E03A1972495B00DED552 /* Are_You_OpenTests.m */; };
 		B1F2E0471972499000DED552 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F2E0451972499000DED552 /* SearchViewController.m */; };
 		B1F2E0481972499000DED552 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1F2E0461972499000DED552 /* SearchViewController.xib */; };
-		B1F2E04B197249C000DED552 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F2E04A197249C000DED552 /* Constants.m */; };
 		B1F2E04D19724A0F00DED552 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1F2E04C19724A0F00DED552 /* AVFoundation.framework */; };
 		B1F2E04F19724A1800DED552 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1F2E04E19724A1800DED552 /* CoreData.framework */; };
 		B1F2E05119724A1F00DED552 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1F2E05019724A1F00DED552 /* CoreLocation.framework */; };
@@ -78,6 +78,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B1282A0B1B01FA8C000A80FF /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		B1282A0C1B01FA8C000A80FF /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		B12D482D1AD9B3EF000EE732 /* ResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewCell.h; sourceTree = "<group>"; };
 		B12D482E1AD9B3EF000EE732 /* ResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewCell.m; sourceTree = "<group>"; };
 		B12D482F1AD9B3EF000EE732 /* ResultsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsTableViewCell.xib; sourceTree = "<group>"; };
@@ -108,8 +110,6 @@
 		B1F2E0441972499000DED552 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		B1F2E0451972499000DED552 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		B1F2E0461972499000DED552 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
-		B1F2E049197249C000DED552 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		B1F2E04A197249C000DED552 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		B1F2E04C19724A0F00DED552 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B1F2E04E19724A1800DED552 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B1F2E05019724A1F00DED552 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -290,10 +290,10 @@
 		B1F2E01C1972495B00DED552 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B1282A0B1B01FA8C000A80FF /* Constants.m */,
+				B1282A0C1B01FA8C000A80FF /* Constants.h */,
 				D8364F0D1AEAA8B40030B3F1 /* SMCalloutView.h */,
 				D8364F0E1AEAA8B40030B3F1 /* SMCalloutView.m */,
-				B1F2E049197249C000DED552 /* Constants.h */,
-				B1F2E04A197249C000DED552 /* Constants.m */,
 				B1F2E0241972495B00DED552 /* AppDelegate.h */,
 				B1F2E0251972495B00DED552 /* AppDelegate.m */,
 				B1F2E01D1972495B00DED552 /* Are You Open-Info.plist */,
@@ -501,11 +501,11 @@
 				B1F2E0881972624A00DED552 /* AFSecurityPolicy.m in Sources */,
 				B1F2E0A61972625100DED552 /* UIWebView+AFNetworking.m in Sources */,
 				D88987F11ACB430C002EF795 /* CloseToMeViewController.m in Sources */,
-				B1F2E04B197249C000DED552 /* Constants.m in Sources */,
 				B1F2E06B19724BB600DED552 /* MapInformationViewController.m in Sources */,
 				B1F2E0861972624A00DED552 /* AFHTTPSessionManager.m in Sources */,
 				B1F2E0A01972625100DED552 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				B1F2E09F1972625100DED552 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				B1282A0D1B01FA8C000A80FF /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
